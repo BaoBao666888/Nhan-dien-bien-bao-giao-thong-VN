@@ -1,0 +1,35 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="Trang chủ"/>
+
+    <item
+        android:id="@+id/nav_vehicle_list"
+        android:icon="@drawable/ic_announcement"
+        android:title="Danh sách xe"/>
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Cài đặt"/>
+
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@drawable/ic_info"
+        android:title="About Us"/>
+
+    <!-- Nút đăng nhập -->
+    <item
+        android:id="@+id/nav_login"
+        android:icon="@drawable/ic_login"
+        android:title="Đăng nhập"
+        android:visible="true"/>  <!-- Mặc định hiện -->
+
+    <!-- Nút đăng xuất -->
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_exit"
+        android:title="Đăng xuất"
+        android:visible="false"/> <!-- Mặc định ẩn -->
+</menu>

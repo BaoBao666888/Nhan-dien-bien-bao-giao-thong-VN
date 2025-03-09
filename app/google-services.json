@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "44898065166",
+    "project_id": "nhan-dien-bien-so-xe-vn",
+    "storage_bucket": "nhan-dien-bien-so-xe-vn.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44898065166:android:8fcdcf8d6df228dcea555f",
+        "android_client_info": {
+          "package_name": "com.example.nhandienbiensoxevn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44898065166-hvlekmrgfq4f709lgsvae97232l444b7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_iq4qoJm9RN-UNpG9jEE61TN7NLVf4Ac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44898065166-hvlekmrgfq4f709lgsvae97232l444b7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
