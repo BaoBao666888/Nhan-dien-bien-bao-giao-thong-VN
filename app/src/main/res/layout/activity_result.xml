@@ -118,7 +118,7 @@
         android:id="@+id/btnExit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thoát"
+        android:text="Về danh sách xe"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:backgroundTint="@color/red"

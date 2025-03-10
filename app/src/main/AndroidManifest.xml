@@ -20,6 +20,22 @@
         android:theme="@style/Theme.NhanDienBienSoXeVN"
         tools:targetApi="31">
         <activity
+            android:name=".AboutActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NhanDienBienSoXeVN" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NhanDienBienSoXeVN" />
+        <activity
+            android:name=".StatisticsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NhanDienBienSoXeVN" />
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NhanDienBienSoXeVN" />
+        <activity
             android:name=".VehicleListActivity"
             android:exported="false"
             android:theme="@style/Theme.NhanDienBienSoXeVN" />

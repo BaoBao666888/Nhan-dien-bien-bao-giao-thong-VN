@@ -1,13 +1,21 @@
 package com.example.nhandienbiensoxevn;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.net.Uri;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+import java.time.Instant;
+
 public class ResultActivity extends AppCompatActivity {
+    private ImageView imgCar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,5 +36,18 @@ public class ResultActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        imgCar = findViewById(R.id.imgCar);
+
+        // Nhận đường dẫn ảnh từ Intent
+        String imagePath = getIntent().getStringExtra("image_path");
+
+        if (imagePath != null) {
+            File imgFile = new File(imagePath);
+            if (imgFile.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+                imgCar.setImageBitmap(bitmap);
+            }
+        }
     }
 }
