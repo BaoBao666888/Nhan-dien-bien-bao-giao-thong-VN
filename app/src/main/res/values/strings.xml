@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NhanDienBienBao</string>
+
+    <string-array name="language_options">
+        <item>Tiếng Việt</item>
+        <item>English</item>
+        <item>日本語</item>
+        <item>Français</item>
+        <item>Español</item>
+    </string-array>
+</resources>
