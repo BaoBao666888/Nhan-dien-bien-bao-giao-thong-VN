@@ -93,20 +93,35 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
 
-            <View
+            <FrameLayout
+                android:id="@+id/frame_chon_anh"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:background="#D3D3D3" />
+                android:background="#D3D3D3"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_input_add"
+                    app:tint="#555" />
+
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Videos"
+                android:text="Chọn ảnh"
                 android:textSize="12sp"
                 android:gravity="center"/>
         </LinearLayout>
+
     </LinearLayout>
 
     <!-- More albums text -->

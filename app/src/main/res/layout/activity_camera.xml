@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,7 +5,34 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="?android:colorBackground">
+
+    <!-- Nút quay lại -->
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@android:drawable/ic_media_previous"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="Quay lại"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp" />
+
+    <!-- Tiêu đề "Ảnh gốc" (căn giữa) -->
+    <TextView
+        android:id="@+id/text_original"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ảnh gốc"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/back_button"
+        android:layout_centerHorizontal="true" />
 
     <!-- Ảnh gốc -->
     <ImageView
@@ -14,20 +40,34 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:scaleType="centerCrop"
-        android:layout_alignParentTop="true"/>
+        android:layout_below="@id/text_original"
+        android:layout_marginTop="8dp" />
+
+    <!-- Tiêu đề "Các biển báo được nhận diện" (căn giữa) -->
+    <TextView
+        android:id="@+id/text_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Các biển báo được nhận diện"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_below="@id/capturedImage"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true" />
 
     <!-- Danh sách các vùng biển báo -->
     <ScrollView
         android:id="@+id/scrollResults"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/capturedImage"
-        android:layout_marginTop="12dp">
+        android:layout_below="@id/text_results"
+        android:layout_marginTop="8dp">
 
         <LinearLayout
             android:id="@+id/resultsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+            android:orientation="vertical"
+            android:background="?android:colorBackground" />
     </ScrollView>
 </RelativeLayout>
