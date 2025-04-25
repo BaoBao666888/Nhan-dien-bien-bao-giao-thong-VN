@@ -37,6 +37,24 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(this, RegisterActivity.class));
             finish();
         });
+
+        findViewById(R.id.forgotPassword).setOnClickListener(v -> {
+            String email = emailField.getText().toString().trim();
+            if (email.isEmpty()) {
+                Toast.makeText(this, "Nhập email trước khi đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            mAuth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(this, "Đã gửi email đặt lại mật khẩu!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Lỗi: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        });
+
     }
 
     private void login() {

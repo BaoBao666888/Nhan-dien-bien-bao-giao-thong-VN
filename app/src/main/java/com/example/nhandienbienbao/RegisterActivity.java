@@ -29,9 +29,11 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(v -> register());
 
         findViewById(R.id.tvLoginLink).setOnClickListener(v -> {
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         });
+
     }
 
     private void register() {

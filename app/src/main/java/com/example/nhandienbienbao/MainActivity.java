@@ -77,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
         adapter = new AlbumAdapter(this, imageList);
         recycler.setAdapter(adapter);
 
+        adapter.setSelectionChangeListener(() -> {
+            LinearLayout actionBar = findViewById(R.id.bottomActionBar);
+            actionBar.setVisibility(View.VISIBLE);
+        });
+
 
 
         // FAB mở camera

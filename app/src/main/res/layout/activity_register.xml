@@ -133,16 +133,4 @@
         android:gravity="center"
         android:onClick="onLoginLinkClick" />
 
-    <!-- Nút Thoát -->
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Đăng nhập"
-        android:backgroundTint="#4CAF50"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:paddingTop="16dp"
-        android:onClick="onlogoutClick" />
-
 </LinearLayout>
