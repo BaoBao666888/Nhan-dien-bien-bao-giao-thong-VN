@@ -2,10 +2,18 @@ package com.example.nhandienbienbao;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class ThongKeActivity extends AppCompatActivity {
     @Override
@@ -43,5 +51,47 @@ public class ThongKeActivity extends AppCompatActivity {
                     .setNegativeButton("Hủy", null)
                     .show();
         });
+
+        //thêm
+        TextView textStatsContent = findViewById(R.id.textStatsContent);
+
+        File file = new File(getExternalFilesDir(null), "thongke.csv");
+        if (file.exists()) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                StringBuilder builder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line).append("\n");
+                }
+                reader.close();
+                textStatsContent.setText(builder.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            textStatsContent.setText("Chưa có thống kê nào.");
+        }
+
+        //thêm
+        Button btnClear = findViewById(R.id.btnClearStats);
+
+        btnClear.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Xoá thống kê")
+                    .setMessage("Bạn có chắc muốn xoá toàn bộ dữ liệu thống kê không?")
+                    .setPositiveButton("Xoá", (dialog, which) -> {
+                        if (file.exists() && file.delete()) {
+                            textStatsContent.setText("Chưa có thống kê nào.");
+                            Toast.makeText(this, "Đã xoá thống kê!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Không thể xoá!", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("Hủy", null)
+                    .show();
+        });
+
+
     }
 }

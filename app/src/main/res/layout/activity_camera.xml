@@ -1,3 +1,4 @@
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -70,4 +71,13 @@
             android:orientation="vertical"
             android:background="?android:colorBackground" />
     </ScrollView>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:elevation="6dp"/>
+
 </RelativeLayout>

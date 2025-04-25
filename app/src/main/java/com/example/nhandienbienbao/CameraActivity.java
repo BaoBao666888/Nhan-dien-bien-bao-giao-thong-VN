@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import org.tensorflow.lite.Interpreter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
@@ -51,12 +53,14 @@ public class CameraActivity extends AppCompatActivity {
     private Uri photoUri;
     private Bitmap currentBitmap;
     private List<String> classNames = new ArrayList<>();
+    private boolean isFromAlbum = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-
+        Intent intent = getIntent();
+        isFromAlbum = intent.hasExtra("image_uri");
         imageView = findViewById(R.id.capturedImage);
         resultsContainer = findViewById(R.id.resultsContainer);
         ImageView backButton = findViewById(R.id.back_button);
@@ -70,15 +74,20 @@ public class CameraActivity extends AppCompatActivity {
             finish();
         }
 
-        Intent intent = getIntent();
         String source = getIntent().getStringExtra("source");
 
         if (getIntent().hasExtra("image_uri")) {
-            // Nhận ảnh từ chỗ khác → xử lý luôn
             Uri imageUri = getIntent().getParcelableExtra("image_uri");
             imageView.setImageURI(imageUri);
             currentBitmap = getBitmapFromUri(imageUri);
-            if (currentBitmap != null) runTFLite(currentBitmap);
+
+            ProgressBar loading = findViewById(R.id.progressBar);
+            loading.setVisibility(View.VISIBLE);
+
+            imageView.postDelayed(() -> {
+                if (currentBitmap != null) runTFLite(currentBitmap);
+                loading.setVisibility(View.GONE);
+            }, 500);
 
         } else {
             // Mặc định: luôn mở camera nếu không nhận ảnh (kể cả quên "fab")
@@ -101,7 +110,15 @@ public class CameraActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && photoFile != null && photoFile.exists()) {
             Bitmap photo = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
             imageView.setImageBitmap(photo);
-            runTFLite(photo);
+
+            ProgressBar loading = findViewById(R.id.progressBar);
+            loading.setVisibility(View.VISIBLE);
+
+            imageView.postDelayed(() -> {
+                runTFLite(photo);
+                loading.setVisibility(View.GONE);
+            }, 500); // delay nhỏ để đảm bảo UI đã render xong
+
         } else {
             finish();
         }
@@ -167,8 +184,10 @@ public class CameraActivity extends AppCompatActivity {
                 }
             }
         }
+        if (!isFromAlbum) {
+            saveImageToGallery(photo);
+        }
 
-        saveImageToGallery(photo); // tự động lưu ảnh sau khi xử lý
     }
 
     private void addResultView(Bitmap cropped, int cls, float score) {
@@ -181,6 +200,7 @@ public class CameraActivity extends AppCompatActivity {
 
         TextView labelView = new TextView(this);
         String label = (cls < classNames.size()) ? classNames.get(cls) : "Không rõ";
+        saveDetectionLog(label, score);
         labelView.setText("Biển báo: " + label);
         labelView.setTextSize(18);
         labelView.setTextColor(Color.BLACK);
@@ -224,4 +244,28 @@ public class CameraActivity extends AppCompatActivity {
             }
         }
     }
+    private void saveDetectionLog(String label, float score) {
+        String filename = "thongke.csv";
+        String line = String.format(Locale.getDefault(), "%s,%s,%.1f%%\n",
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()),
+                label,
+                score * 100);
+
+        try {
+            File file = new File(getExternalFilesDir(null), filename);
+            boolean append = file.exists();
+            FileOutputStream fos = new FileOutputStream(file, append);
+            fos.write(line.getBytes());
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void finish() {
+        setResult(RESULT_OK); // cho biết vừa nhận diện
+        super.finish();
+    }
+
+
 }
