@@ -46,11 +46,13 @@ public class MainActivity extends AppCompatActivity {
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                     selectedImageUri = result.getData().getData();
-                    Toast.makeText(this, "Đã chọn ảnh!", Toast.LENGTH_SHORT).show();
-
-                    // Nếu bạn muốn hiện ảnh ra, có thể dùng ImageView và setImageURI(selectedImageUri)
-                } else {
-                    Toast.makeText(this, "Bạn chưa chọn ảnh nào", Toast.LENGTH_SHORT).show();
+                    if (selectedImageUri != null) {
+                        Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                        intent.putExtra("image_uri", selectedImageUri);
+                        startActivity(intent);  // Gửi ảnh sang CameraActivity để nhận diện
+                    } else {
+                        Toast.makeText(this, "Lỗi khi lấy ảnh!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
