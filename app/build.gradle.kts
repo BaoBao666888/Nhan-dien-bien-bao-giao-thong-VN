@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
 }
-
+apply(plugin = "com.google.gms.google-services")
 android {
     namespace = "com.example.nhandienbienbao"
     compileSdk = 35
@@ -30,8 +30,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    aaptOptions {
-        noCompress("tflite")
+    androidResources {
+        noCompress += "tflite"
     }
 }
 
@@ -53,4 +53,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("org.tensorflow:tensorflow-lite:2.13.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
+    implementation("com.google.firebase:firebase-auth")
+
 }

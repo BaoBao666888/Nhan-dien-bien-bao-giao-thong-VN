@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1010177497727",
+    "project_id": "nhan-dien-bien-bao-gt-vn",
+    "storage_bucket": "nhan-dien-bien-bao-gt-vn.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010177497727:android:4256c671a177ae55a0bd4a",
+        "android_client_info": {
+          "package_name": "com.example.nhandienbienbao"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZOMSihDjG0wI7ua2FY36tojG3FhJtZ_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

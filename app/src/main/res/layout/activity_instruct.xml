@@ -165,6 +165,7 @@
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_lock_power_off" />
             <TextView
+                android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thoát"

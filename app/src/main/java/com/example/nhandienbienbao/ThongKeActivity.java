@@ -14,7 +14,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
+import com.example.nhandienbienbao.Helper.BottomNavHelper;
 public class ThongKeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +35,7 @@ public class ThongKeActivity extends AppCompatActivity {
             finish();
         });
 
-        LinearLayout exitButton = findViewById(R.id.nav_thoat);
-        exitButton.setOnClickListener(v -> {
-            // Hiển thị hộp thoại xác nhận trước khi thoát
-            new AlertDialog.Builder(this)
-                    .setTitle("Xác nhận thoát")
-                    .setMessage("Bạn có muốn thoát khỏi ứng dụng không?")
-                    .setPositiveButton("Thoát", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Thoát ứng dụng
-                            finishAffinity();  // Hoặc dùng System.exit(0);
-                        }
-                    })
-                    .setNegativeButton("Hủy", null)
-                    .show();
-        });
+        BottomNavHelper.setupBottomNav(this, R.id.nav_thoat, R.id.text);
 
         //thêm
         TextView textStatsContent = findViewById(R.id.textStatsContent);

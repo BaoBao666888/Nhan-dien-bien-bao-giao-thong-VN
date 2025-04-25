@@ -58,6 +58,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        if (position >= selectedFlags.length) return;
         Uri uri = imageUris.get(position);
         holder.image.setImageURI(uri);
 

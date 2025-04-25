@@ -35,7 +35,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.example.nhandienbienbao.Helper.BottomNavHelper;
 public class MainActivity extends AppCompatActivity {
 
     private Uri selectedImageUri;
@@ -74,8 +74,9 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recycler = findViewById(R.id.recyclerAlbum);
         recycler.setLayoutManager(new GridLayoutManager(this, 3));
         List<Uri> imageList = loadImagesFromGallery();
-        AlbumAdapter adapter = new AlbumAdapter(this, imageList);
+        adapter = new AlbumAdapter(this, imageList);
         recycler.setAdapter(adapter);
+
 
 
         // FAB mở camera
@@ -95,14 +96,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bntSetting).setOnClickListener(v ->
                 startActivity(new Intent(this, SettingActivity.class)));
 
-        findViewById(R.id.bntThoat).setOnClickListener(v -> {
-            new AlertDialog.Builder(this)
-                    .setTitle("Xác nhận thoát")
-                    .setMessage("Bạn có muốn thoát khỏi ứng dụng không?")
-                    .setPositiveButton("Thoát", (dialog, which) -> finishAffinity())
-                    .setNegativeButton("Hủy", null)
-                    .show();
-        });
+        BottomNavHelper.setupBottomNav(this, R.id.bntThoat, R.id.text);
 
         // Xử lý khi bấm vào khung chọn ảnh
         FrameLayout frameChonAnh = findViewById(R.id.frame_chon_anh);

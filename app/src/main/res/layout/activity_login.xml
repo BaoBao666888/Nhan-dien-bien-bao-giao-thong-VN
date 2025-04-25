@@ -27,6 +27,7 @@
         android:layout_marginBottom="16dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
+
         app:hintAnimationEnabled="true"
         app:boxBackgroundColor="@android:color/white"
         app:boxBackgroundMode="outline"
@@ -37,7 +38,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tên đăng nhập"
+            android:id="@+id/email"
+            android:hint="Email"
             android:inputType="textPersonName"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
@@ -54,6 +56,7 @@
         android:layout_marginBottom="32dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
+
         app:hintAnimationEnabled="true"
         app:boxBackgroundColor="@android:color/white"
         app:boxBackgroundMode="outline"
@@ -64,6 +67,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/password"
             android:hint="Mật khẩu"
             android:inputType="textPassword"
             android:paddingStart="16dp"

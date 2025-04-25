@@ -8,6 +8,8 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nhandienbienbao.Helper.BottomNavHelper;
+
 public class InstructActivity extends AppCompatActivity {
 
     @Override
@@ -29,21 +31,6 @@ public class InstructActivity extends AppCompatActivity {
             finish();
         });
 
-        LinearLayout exitButton = findViewById(R.id.bntThoat);
-        exitButton.setOnClickListener(v -> {
-            // Hiển thị hộp thoại xác nhận trước khi thoát
-            new AlertDialog.Builder(this)
-                    .setTitle("Xác nhận thoát")
-                    .setMessage("Bạn có muốn thoát khỏi ứng dụng không?")
-                    .setPositiveButton("Thoát", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Thoát ứng dụng
-                            finishAffinity();  // Hoặc dùng System.exit(0);
-                        }
-                    })
-                    .setNegativeButton("Hủy", null)
-                    .show();
-        });
+        BottomNavHelper.setupBottomNav(this, R.id.bntThoat, R.id.text);
     }
 }
