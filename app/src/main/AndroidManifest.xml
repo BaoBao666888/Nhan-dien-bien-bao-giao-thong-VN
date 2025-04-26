@@ -24,7 +24,6 @@
         </provider>
         <activity
             android:name=".MainActivity"/>
-        <activity android:name=".ThongKeActivity" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -35,8 +34,6 @@
         </activity>
 
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".InstructActivity"/>
-        <activity android:name=".SettingActivity"/>
         <activity android:name=".CameraActivity"/>
     </application>
 

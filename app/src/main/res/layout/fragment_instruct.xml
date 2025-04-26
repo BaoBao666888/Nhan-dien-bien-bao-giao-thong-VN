@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="40dp"
+    android:orientation="vertical">
+
+    <!-- Nội dung hướng dẫn -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hướng dẫn sử dụng ứng dụng nhận diện biển báo giao thông"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. Mở ứng dụng và nhấn nút 'Bắt đầu' để quét biển báo giao thông."
+                android:textSize="16sp"
+                android:paddingBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2. Cho phép ứng dụng truy cập vào camera của thiết bị."
+                android:textSize="16sp"
+                android:paddingBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3. Hướng camera của điện thoại về biển báo giao thông mà bạn muốn nhận diện."
+                android:textSize="16sp"
+                android:paddingBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4. Ứng dụng sẽ tự động nhận diện biển báo và hiển thị thông tin về biển báo đó."
+                android:textSize="16sp"
+                android:paddingBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5. Bạn có thể xem lại lịch sử nhận diện và tra cứu các biển báo đã quét."
+                android:textSize="16sp"
+                android:paddingBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="6. Truy cập vào phần 'Cài đặt' để thay đổi ngôn ngữ và các tùy chọn khác."
+                android:textSize="16sp"
+                android:paddingBottom="8dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

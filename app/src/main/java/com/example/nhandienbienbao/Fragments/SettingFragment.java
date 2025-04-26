@@ -1,26 +1,28 @@
-package com.example.nhandienbienbao;
+package com.example.nhandienbienbao.Fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Spinner;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatDelegate;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Spinner;
+import com.example.nhandienbienbao.R;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
-public class SettingActivity extends AppCompatActivity {
+public class SettingFragment extends Fragment {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_setting, container, false);
 
-        Spinner themeSpinner = findViewById(R.id.theme_spinner);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Spinner themeSpinner = view.findViewById(R.id.theme_spinner);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
 
-        // Khởi tạo theme spinner
         int savedMode = prefs.getInt("theme_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         switch (savedMode) {
             case AppCompatDelegate.MODE_NIGHT_NO:
@@ -33,9 +35,9 @@ public class SettingActivity extends AppCompatActivity {
                 themeSpinner.setSelection(0);
         }
 
-        themeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        themeSpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(android.widget.AdapterView<?> parent, View view, int position, long id) {
                 int mode;
                 switch (position) {
                     case 1:
@@ -52,7 +54,9 @@ public class SettingActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(android.widget.AdapterView<?> parent) {}
         });
+
+        return view;
     }
 }

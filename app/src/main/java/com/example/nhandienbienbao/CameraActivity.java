@@ -15,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -54,6 +56,7 @@ public class CameraActivity extends AppCompatActivity {
     private Bitmap currentBitmap;
     private List<String> classNames = new ArrayList<>();
     private boolean isFromAlbum = false;
+    private boolean isProcessing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +86,12 @@ public class CameraActivity extends AppCompatActivity {
 
             ProgressBar loading = findViewById(R.id.progressBar);
             loading.setVisibility(View.VISIBLE);
+            isProcessing = true;
 
             imageView.postDelayed(() -> {
                 if (currentBitmap != null) runTFLite(currentBitmap);
                 loading.setVisibility(View.GONE);
+                isProcessing = false;
             }, 500);
 
         } else {
@@ -102,6 +107,28 @@ public class CameraActivity extends AppCompatActivity {
                 finish();
             }
         }
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (isProcessing) {
+                    new AlertDialog.Builder(CameraActivity.this)
+                            .setTitle("Đang nhận diện")
+                            .setMessage("Ứng dụng đang nhận diện ảnh. Bạn chắc chắn muốn thoát?")
+                            .setPositiveButton("Thoát", (dialog, which) -> {
+                                isProcessing = false;
+                                setResult(RESULT_OK);
+                                finish();
+                            })
+                            .setNegativeButton("Huỷ", null)
+                            .show();
+                } else {
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -115,9 +142,13 @@ public class CameraActivity extends AppCompatActivity {
             loading.setVisibility(View.VISIBLE);
 
             imageView.postDelayed(() -> {
-                runTFLite(photo);
+                if (!isFinishing() && !isDestroyed() && currentBitmap != null) {
+                    runTFLite(currentBitmap);
+                }
                 loading.setVisibility(View.GONE);
-            }, 500); // delay nhỏ để đảm bảo UI đã render xong
+                isProcessing = false;
+            }, 500);
+
 
         } else {
             finish();
@@ -158,6 +189,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void runTFLite(Bitmap photo) {
+        if (photo == null || tflite == null) return;
         ByteBuffer input = convertBitmapToByteBuffer(photo);
         float[][][] output = new float[1][300][6];
         tflite.run(input, output);

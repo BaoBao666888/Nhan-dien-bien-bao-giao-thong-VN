@@ -1,8 +1,14 @@
 package com.example.nhandienbienbao;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.fragment.app.Fragment;
+import com.example.nhandienbienbao.Fragments.AlbumFragment;
+import com.example.nhandienbienbao.Fragments.InstructFragment;
+import com.example.nhandienbienbao.Fragments.ThongKeFragment;
+import com.example.nhandienbienbao.Fragments.SettingFragment;
 import android.app.Activity;
 import android.content.ContentUris;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -11,35 +17,37 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentTransaction;
+
 
 import com.example.nhandienbienbao.Adapter.AlbumAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 
 import java.util.ArrayList;
+import java.util.Stack;
 import java.util.List;
 import com.example.nhandienbienbao.Helper.BottomNavHelper;
 public class MainActivity extends AppCompatActivity {
-
+    private Stack<Integer> fragmentBackStack = new Stack<>();
     private Uri selectedImageUri;
-    private AlbumAdapter adapter;
+    private int currentTabId;
+
 
     // ActivityResultLauncher để chọn ảnh
     private final ActivityResultLauncher<Intent> pickImageLauncher =
@@ -71,42 +79,92 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        RecyclerView recycler = findViewById(R.id.recyclerAlbum);
-        recycler.setLayoutManager(new GridLayoutManager(this, 3));
-        List<Uri> imageList = loadImagesFromGallery();
-        adapter = new AlbumAdapter(this, imageList);
-        recycler.setAdapter(adapter);
 
-        adapter.setSelectionChangeListener(() -> {
-            LinearLayout actionBar = findViewById(R.id.bottomActionBar);
-            actionBar.setVisibility(View.VISIBLE);
+        replaceFragment(new AlbumFragment(), R.id.bntAlbum);
+
+        findViewById(R.id.bntAlbum).setOnClickListener(v -> {
+            if (currentTabId != R.id.bntAlbum) {
+                replaceFragment(new AlbumFragment(), R.id.bntAlbum);
+                highlightBottomNav(R.id.bntAlbum);
+            }
         });
 
 
-
-        // FAB mở camera
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-            startActivityForResult(intent, 123);
+        findViewById(R.id.bntHuongDan).setOnClickListener(v -> {
+            if (currentTabId != R.id.bntHuongDan){
+                replaceFragment(new InstructFragment(), R.id.bntHuongDan);
+                highlightBottomNav(R.id.bntHuongDan);
+            }
         });
 
-        // Các menu chuyển trang
-        findViewById(R.id.bntThongKe).setOnClickListener(v ->
-                startActivity(new Intent(this, ThongKeActivity.class)));
+        findViewById(R.id.bntThongKe).setOnClickListener(v -> {
+            if (currentTabId != R.id.bntThongKe) {
+                replaceFragment(new ThongKeFragment(), R.id.bntThongKe);
+                highlightBottomNav(R.id.bntThongKe);
+            }
+        });
 
-        findViewById(R.id.bntHuongDan).setOnClickListener(v ->
-                startActivity(new Intent(this, InstructActivity.class)));
+        findViewById(R.id.bnttructiep).setOnClickListener(v -> {
+            // Chưa làm gì, nếu muốn có highlight thì:
+//            highlightBottomNav(R.id.bnttructiep);
+        });
 
-        findViewById(R.id.bntSetting).setOnClickListener(v ->
-                startActivity(new Intent(this, SettingActivity.class)));
+        findViewById(R.id.bntThoat).setOnClickListener(v -> {
+//            highlightBottomNav(R.id.bntThoat);
+            BottomNavHelper.setupBottomNav(this, R.id.bntThoat, R.id.text);
+            // Xử lý logout
+        });
 
-        BottomNavHelper.setupBottomNav(this, R.id.bntThoat, R.id.text);
+        findViewById(R.id.bntSetting).setOnClickListener(v -> replaceFragment(new SettingFragment(), R.id.bntSetting));
 
-        // Xử lý khi bấm vào khung chọn ảnh
-        FrameLayout frameChonAnh = findViewById(R.id.frame_chon_anh);
-        frameChonAnh.setOnClickListener(v -> openGallery());
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (!fragmentBackStack.isEmpty()) {
+                    int lastTabId = fragmentBackStack.pop();
+                    replaceFragment(new AlbumFragment(), R.id.bntAlbum);
+                } else {
+                    // Nếu đang ở Album thì thoát app
+                    if (currentTabId == R.id.bntAlbum) {
+                        finish();
+                    } else {
+                        replaceFragment(new AlbumFragment(), R.id.bntAlbum);
+                    }
+                }
+            }
+        });
+
+
     }
+
+
+    private void replaceFragment(Fragment fragment, int newTabId) {
+        if (newTabId != currentTabId) {
+            boolean isRight = newTabId > currentTabId;
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(
+                    isRight ? R.anim.slide_in_right : R.anim.slide_out_left,
+                    isRight ? R.anim.slide_out_left : R.anim.slide_out_right
+            );
+            transaction.replace(R.id.fragmentContainer, fragment).commit();
+
+            //  Nếu không phải Album thì mới push vào fragmentBackStack
+            if (currentTabId != R.id.bntAlbum) {
+                fragmentBackStack.clear();  // 👉 Chỉ cho 1 bước back
+                fragmentBackStack.push(currentTabId);
+            }
+
+            highlightBottomNav(newTabId);
+
+            ImageView settingBtn = findViewById(R.id.bntSetting);
+            settingBtn.setVisibility(fragment instanceof SettingFragment ? View.GONE : View.VISIBLE);
+
+            currentTabId = newTabId;
+        }
+    }
+
+
     private List<Uri> loadImagesFromGallery() {
         List<Uri> imageUris = new ArrayList<>();
         String[] projection = {MediaStore.Images.Media._ID};
@@ -134,80 +192,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
-        pickImageLauncher.launch(intent);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        List<Uri> imageList = loadImagesFromGallery();
-        RecyclerView recycler = findViewById(R.id.recyclerAlbum);
-        if (adapter == null) {
-            adapter = new AlbumAdapter(this, imageList);
-            adapter.setSelectionChangeListener(() -> {
-                LinearLayout actionBar = findViewById(R.id.bottomActionBar);
-                actionBar.setVisibility(View.VISIBLE);
-            });
-            recycler.setAdapter(adapter);
-        } else {
-            adapter.updateData(imageList);
-        }
-
-
-        LinearLayout actionBar = findViewById(R.id.bottomActionBar);
-        Button btnSelectAll = findViewById(R.id.btnSelectAll);
-
-        btnSelectAll.setOnClickListener(v -> {
-            boolean selectAll = !adapter.areAllSelected();
-            if (selectAll) {
-                adapter.selectAll();
-                btnSelectAll.setText("Bỏ chọn tất cả");
-                actionBar.setVisibility(View.VISIBLE);
-            } else {
-                adapter.clearSelection();
-                btnSelectAll.setText("Chọn tất cả");
-                actionBar.setVisibility(View.GONE);
-            }
-        });
-
-
-        findViewById(R.id.btnCancel).setOnClickListener(v -> {
-            adapter.clearSelection();
-            actionBar.setVisibility(View.GONE);
-            btnSelectAll.setText("Chọn tất cả");
-        });
-
-
-        findViewById(R.id.btnDelete).setOnClickListener(v -> {
-            List<Uri> selected = adapter.getSelectedUris();
-            if (selected.isEmpty()) return;
-
-            new AlertDialog.Builder(this)
-                    .setTitle("Xoá ảnh")
-                    .setMessage("Bạn có chắc muốn xoá " + selected.size() + " ảnh?")
-                    .setPositiveButton("Xoá", (dialog, which) -> {
-                        for (Uri uri : selected) {
-                            getContentResolver().delete(uri, null, null);
-                        }
-                        Toast.makeText(this, "Đã xoá ảnh", Toast.LENGTH_SHORT).show();
-                        onResume(); // reload lại ảnh
-                    })
-                    .setNegativeButton("Huỷ", null)
-                    .show();
-        });
-
-        // Hiện actionBar nếu đang multiSelect
-        recycler.postDelayed(() -> {
-            if (adapter.isMultiSelectMode()) {
-                actionBar.setVisibility(View.VISIBLE);
-            } else {
-                actionBar.setVisibility(View.GONE);
-            }
-        }, 300);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -216,4 +205,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void highlightBottomNav(int activeId) {
+        int[] buttonIds = {
+                R.id.bntHuongDan,
+                R.id.bntThongKe,
+                R.id.bntAlbum,
+                R.id.bnttructiep,
+                R.id.bntThoat
+        };
+
+        for (int id : buttonIds) {
+            LinearLayout btn = findViewById(id);
+            ImageView icon = (ImageView) btn.getChildAt(0);
+            TextView text = (TextView) btn.getChildAt(1);
+
+            if (id == activeId) {
+                text.setTextColor(getResources().getColor(R.color.purple_500));
+                text.setTypeface(null, android.graphics.Typeface.BOLD);
+                if (icon != null) icon.setColorFilter(getResources().getColor(R.color.purple_500));
+            } else {
+                text.setTextColor(getResources().getColor(android.R.color.black));
+                text.setTypeface(null, android.graphics.Typeface.NORMAL);
+                if (icon != null)
+                    icon.setColorFilter(getResources().getColor(android.R.color.black));
+            }
+        }
+    }
 }
