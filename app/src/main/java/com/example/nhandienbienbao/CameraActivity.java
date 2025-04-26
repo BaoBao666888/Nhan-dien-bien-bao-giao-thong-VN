@@ -135,25 +135,26 @@ public class CameraActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && photoFile != null && photoFile.exists()) {
-            Bitmap photo = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-            imageView.setImageBitmap(photo);
+            currentBitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath()); // 🛠 THÊM DÒNG NÀY!!!
+            imageView.setImageBitmap(currentBitmap);
 
             ProgressBar loading = findViewById(R.id.progressBar);
             loading.setVisibility(View.VISIBLE);
+            isProcessing = true;
 
             imageView.postDelayed(() -> {
-                if (!isFinishing() && !isDestroyed() && currentBitmap != null) {
+                if (currentBitmap != null) {
                     runTFLite(currentBitmap);
                 }
                 loading.setVisibility(View.GONE);
                 isProcessing = false;
             }, 500);
-
-
         } else {
             finish();
         }
     }
+
+
 
     private MappedByteBuffer loadModelFile(String filename) throws IOException {
         AssetFileDescriptor fileDescriptor = getAssets().openFd(filename);

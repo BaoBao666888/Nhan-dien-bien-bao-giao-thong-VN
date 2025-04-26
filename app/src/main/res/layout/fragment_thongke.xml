@@ -35,13 +35,15 @@
         android:id="@+id/textStatsContent"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:padding="16dp"
         android:textSize="14sp"
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/btnClearStats"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" /> <!-- 🛠 THÊM DÒNG NÀY -->
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

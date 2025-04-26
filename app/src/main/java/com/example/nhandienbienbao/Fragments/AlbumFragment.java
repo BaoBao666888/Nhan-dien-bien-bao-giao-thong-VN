@@ -65,9 +65,10 @@ public class AlbumFragment extends Fragment {
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 100);
+            Intent intent = new Intent(getContext(), CameraActivity.class);
+            startActivity(intent);
         });
+
 
         FrameLayout frameChonAnh = view.findViewById(R.id.frame_chon_anh);
         frameChonAnh.setOnClickListener(v -> openGallery());
