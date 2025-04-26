@@ -101,12 +101,16 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_sort_by_size" />
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                app:tint="#9C27B0"
+                android:elevation="4dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thống kê"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:textColor="#9C27B0"
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <!-- Album -->
