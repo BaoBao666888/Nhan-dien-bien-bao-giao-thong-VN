@@ -130,7 +130,7 @@ public class AlbumFragment extends Fragment {
             for (Uri uri : selected) {
                 requireContext().getContentResolver().delete(uri, null, null);
             }
-            Toast.makeText(getContext(), "Đã xoá ảnh", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.da_xoa_anh), Toast.LENGTH_SHORT).show();
             adapter.updateData(loadImagesFromGallery(getContext()));
             actionBar.setVisibility(View.GONE);
         });
@@ -148,11 +148,11 @@ public class AlbumFragment extends Fragment {
             boolean selectAll = !adapter.areAllSelected();
             if (selectAll) {
                 adapter.selectAll();
-                btnSelectAll.setText("Bỏ chọn tất cả");
+                btnSelectAll.setText(getString(R.string.bo_chon_tat_ca));
                 actionBar.setVisibility(View.VISIBLE);
             } else {
                 adapter.clearSelection();
-                btnSelectAll.setText("Chọn tất cả");
+                btnSelectAll.setText(getString(R.string.chon_tat_ca));
                 actionBar.setVisibility(View.GONE);
             }
         });
@@ -160,7 +160,7 @@ public class AlbumFragment extends Fragment {
         btnCancel.setOnClickListener(v -> {
             adapter.clearSelection();
             actionBar.setVisibility(View.GONE);
-            btnSelectAll.setText("Chọn tất cả");
+            btnSelectAll.setText(getString(R.string.chon_tat_ca));
         });
 
         btnDelete.setOnClickListener(v -> {
@@ -168,19 +168,19 @@ public class AlbumFragment extends Fragment {
             if (selected.isEmpty()) return;
 
             new AlertDialog.Builder(requireContext())
-                    .setTitle("Xoá ảnh")
-                    .setMessage("Bạn có chắc muốn xoá " + selected.size() + " ảnh?")
-                    .setPositiveButton("Xoá", (dialog, which) -> {
+                    .setTitle(getString(R.string.xoa_anh))
+                    .setMessage(getString(R.string.ban_co_chac_chan_muon_xoa) + selected.size() + getString(R.string.anh_h))
+                    .setPositiveButton(getString(R.string.xoa), (dialog, which) -> {
                         for (Uri uri : selected) {
                             requireContext().getContentResolver().delete(uri, null, null);
                         }
-                        Toast.makeText(getContext(), "Đã xoá ảnh", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.da_xoa_anh), Toast.LENGTH_SHORT).show();
                         refreshAlbumIfNeeded();
                         adapter.clearSelection();
                         actionBar.setVisibility(View.GONE);
-                        btnSelectAll.setText("Chọn tất cả");
+                        btnSelectAll.setText(getString(R.string.chon_tat_ca));
                     })
-                    .setNegativeButton("Huỷ", null)
+                    .setNegativeButton(getString(R.string.huy), null)
                     .show();
         });
     }

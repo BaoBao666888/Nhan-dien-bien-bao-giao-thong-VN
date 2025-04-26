@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:hint="Tìm kiếm"
+            android:hint="@string/tim_kiem"
             android:paddingStart="8dp" />
     </LinearLayout>
 
@@ -74,7 +74,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chọn ảnh"
+                android:text="@string/chon_anh"
                 android:textSize="12sp"
                 android:gravity="center"/>
         </LinearLayout>
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="More albums"
+        android:text="More images"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/albumsSection"

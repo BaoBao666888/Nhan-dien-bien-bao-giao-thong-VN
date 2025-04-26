@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Traffic Sign Recognition</string>
+
+    <string name="theo_he_thong">Follow system</string>
+    <string name="sang">Light</string>
+    <string name="toi">Dark</string>
+
+
+    <string name="huong_dan_su_dung">How to use the traffic sign recognition app</string>
+    <string name="buoc_1">1. Open the app and press \'Start\' to scan traffic signs.</string>
+    <string name="buoc_2">2. Allow the app to access the device\'s camera.</string>
+    <string name="buoc_3">3. Point the phone\'s camera at the traffic sign you want to recognize.</string>
+    <string name="buoc_4">4. The app will automatically recognize the sign and display its information.</string>
+    <string name="buoc_5">5. You can review the recognition history and look up scanned signs.</string>
+    <string name="buoc_6">6. Access the \'Settings\' section to change the language and other options.</string>
+
+
+    <!-- Navigation -->
+    <string name="huong_dan">Instruction</string>
+    <string name="thong_ke">Statistics</string>
+    <string name="album">Album</string>
+    <string name="truc_tiep">Live</string>
+    <string name="dang_xuat">Logout</string>
+    <string name="dang_nhap">Login</string>
+
+    <!-- Setting -->
+    <string name="cai_dat">Settings</string>
+    <string name="ngon_ngu">Language</string>
+    <string name="giao_dien">Theme</string>
+    <string name="cap_nhat_phan_mem">Update Software</string>
+    <string name="quyen_truy_cap">Permissions</string>
+    <string name="dat_lai_cai_dat">Reset Settings</string>
+    <string name="thong_bao">Notification</string>
+    <string name="quan_ly">Manage</string>
+    <string name="kiem_tra">Check</string>
+
+
+    <!-- Album -->
+    <string name="chon_anh">Select Image</string>
+    <string name="tim_kiem">Search</string>
+    <string name="more_albums">More albums</string>
+
+    <!-- Thống kê -->
+    <string name="tieu_de_thong_ke">Statistics</string>
+    <string name="xoa_thong_ke">Clear Statistics</string>
+    <string name="chua_co_thong_ke">No statistics available.</string>
+
+    <!-- Login/Register -->
+    <string name="dang_ky">Register</string>
+    <string name="email">Email</string>
+    <string name="mat_khau">Password</string>
+    <string name="nhap_lai_mat_khau">Confirm Password</string>
+    <string name="quen_mat_khau">Forgot password?</string>
+    <string name="hoac">Or</string>
+
+    <!-- Camera -->
+    <string name="anh_goc">Original Image</string>
+    <string name="cac_bien_bao_duoc_nhan_dien">Detected Signs</string>
+
+    <!-- Others -->
+    <string name="chon_tat_ca">Select All</string>
+    <string name="bo_chon_tat_ca">Deselect All</string>
+    <string name="huy">Cancel</string>
+    <string name="xoa">Delete</string>
+    <string name="xac_nhan_xoa">Are you sure you want to delete?</string>
+    <string name="da_xoa_anh">Photo(s) deleted</string>
+    <string name="xoa_anh">Delete photo</string>
+    <string name="ban_co_chac_chan_muon_xoa">Are you sure you want to delete </string>
+    <string name="anh_h"> photo(s)?</string>
+    <string name="ban_co_muon_dang_xuat_khong">Do you want to log out?</string>
+    <string name="da_co_tai_khoan_dn">Already have an account? Login</string>
+    <string name="khong_ro">Unknown</string>
+    <string name="bien_bao_2c">Traffic sign: </string>
+    <string name="do_chinh_xac">Accuracy: </string>
+    <string name="quay_lai">Go back</string>
+
+
+</resources>

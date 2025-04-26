@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cài đặt"
+        android:text="@string/cai_dat"
         android:textSize="24sp"
         android:textStyle="bold"
         android:paddingBottom="16dp"/>
@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ngôn ngữ"
+            android:text="@string/ngon_ngu"
             android:textSize="18sp"/>
 
         <Spinner
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Giao diện"
+            android:text="@string/giao_dien"
             android:textSize="18sp" />
 
         <Spinner
@@ -66,7 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Thông báo"
+            android:text="@string/thong_bao"
             android:textSize="18sp"/>
 
         <Switch
@@ -86,14 +86,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cập nhật phần mềm"
+            android:text="@string/cap_nhat_phan_mem"
             android:textSize="18sp"/>
 
         <Button
             android:id="@+id/update_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kiểm tra" />
+            android:text="@string/kiem_tra" />
     </LinearLayout>
 
     <!-- Quyền truy cập -->
@@ -107,14 +107,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Quyền truy cập"
+            android:text="@string/quyen_truy_cap"
             android:textSize="18sp"/>
 
         <Button
             android:id="@+id/access_permission_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quản lý" />
+            android:text="@string/quan_ly" />
     </LinearLayout>
 
     <!-- Đặt lại cài đặt -->
@@ -122,7 +122,7 @@
         android:id="@+id/reset_settings_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Đặt lại cài đặt"
+        android:text="@string/dat_lai_cai_dat"
         android:backgroundTint="#FF6347"
         android:textColor="#FFFFFF"
         android:textSize="18sp"

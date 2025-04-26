@@ -3,6 +3,7 @@
 
     <string-array name="language_options">
         <item>Tiếng Việt</item>
+        <item>简体中文</item>
         <item>English</item>
         <item>日本語</item>
         <item>Français</item>
@@ -10,9 +11,84 @@
     </string-array>
 
     <string-array name="theme_options">
-        <item>Theo hệ thống</item>
-        <item>Sáng</item>
-        <item>Tối</item>
+        <item>@string/theo_he_thong</item>
+        <item>@string/sang</item>
+        <item>@string/toi</item>
     </string-array>
+
+    <!-- Và thêm vào strings.xml các dòng này: -->
+    <string name="theo_he_thong">Theo hệ thống</string>
+    <string name="sang">Sáng</string>
+    <string name="toi">Tối</string>
+
+
+    <!--Hướng dẫn sử dụng-->
+    <string name="huong_dan_su_dung">Hướng dẫn sử dụng ứng dụng nhận diện biển báo giao thông</string>
+    <string name="buoc_1">1. Mở ứng dụng và nhấn nút \'Bắt đầu\' để quét biển báo giao thông.</string>
+    <string name="buoc_2">2. Cho phép ứng dụng truy cập vào camera của thiết bị.</string>
+    <string name="buoc_3">3. Hướng camera của điện thoại về biển báo giao thông mà bạn muốn nhận diện.</string>
+    <string name="buoc_4">4. Ứng dụng sẽ tự động nhận diện biển báo và hiển thị thông tin về biển báo đó.</string>
+    <string name="buoc_5">5. Bạn có thể xem lại lịch sử nhận diện và tra cứu các biển báo đã quét.</string>
+    <string name="buoc_6">6. Truy cập vào phần \'Cài đặt\' để thay đổi ngôn ngữ và các tùy chọn khác.</string>
+
+    <!-- Navigation -->
+    <string name="huong_dan">Hướng dẫn</string>
+    <string name="thong_ke">Thống kê</string>
+    <string name="album">Album</string>
+    <string name="truc_tiep">Trực tiếp</string>
+    <string name="dang_xuat">Đăng xuất</string>
+    <string name="dang_nhap">Đăng nhập</string>
+
+    <!-- Setting -->
+    <string name="cai_dat">Cài đặt</string>
+    <string name="ngon_ngu">Ngôn ngữ</string>
+    <string name="giao_dien">Giao diện</string>
+    <string name="cap_nhat_phan_mem">Cập nhật phần mềm</string>
+    <string name="quyen_truy_cap">Quyền truy cập</string>
+    <string name="dat_lai_cai_dat">Đặt lại cài đặt</string>
+    <string name="thong_bao">Thông báo</string>
+    <string name="quan_ly">Quản lý</string>
+    <string name="kiem_tra">Kiểm tra</string>
+
+    <!-- Album -->
+    <string name="chon_anh">Chọn ảnh</string>
+    <string name="tim_kiem">Tìm kiếm</string>
+    <string name="more_albums">Xem thêm album</string>
+
+    <!-- Thống kê -->
+    <string name="tieu_de_thong_ke">Thống kê</string>
+    <string name="xoa_thong_ke">Xoá thống kê</string>
+    <string name="chua_co_thong_ke">Chưa có thống kê nào.</string>
+
+    <!-- Login/Register -->
+    <string name="dang_ky">Đăng ký</string>
+    <string name="email">Email</string>
+    <string name="mat_khau">Mật khẩu</string>
+    <string name="nhap_lai_mat_khau">Nhập lại mật khẩu</string>
+    <string name="quen_mat_khau">Quên mật khẩu?</string>
+    <string name="hoac">Hoặc</string>
+
+    <!-- Camera -->
+    <string name="anh_goc">Ảnh gốc</string>
+    <string name="cac_bien_bao_duoc_nhan_dien">Các biển báo được nhận diện</string>
+    <string name="quay_lai">Quay lại</string>
+
+    <!-- Others -->
+
+    <string name="chon_tat_ca">Chọn tất cả</string>
+    <string name="bo_chon_tat_ca">Bỏ chọn tất cả</string>
+    <string name="huy">Huỷ</string>
+    <string name="xoa">Xoá</string>
+    <string name="xac_nhan_xoa">Bạn có chắc muốn xoá?</string>
+    <string name="da_xoa_anh">Đã xóa ảnh</string>
+    <string name="xoa_anh">Xóa ảnh</string>
+    <string name="ban_co_chac_chan_muon_xoa">Bạn có chắc chắn muốn xóa </string>
+    <string name="anh_h"> ảnh?</string>
+    <string name="ban_co_muon_dang_xuat_khong">Bạn có muốn đăng xuất không?</string>
+    <string name="da_co_tai_khoan_dn">Đã có tài khoản? Đăng nhập</string>
+    <string name="khong_ro">Không rõ</string>
+    <string name="bien_bao_2c">Biển báo: </string>
+    <string name="do_chinh_xac">Độ chính xác: </string>
+
 
 </resources>

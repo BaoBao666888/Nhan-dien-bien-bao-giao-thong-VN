@@ -232,16 +232,16 @@ public class CameraActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT));
 
         TextView labelView = new TextView(this);
-        String label = (cls < classNames.size()) ? classNames.get(cls) : "Không rõ";
+        String label = (cls < classNames.size()) ? classNames.get(cls) : getString(R.string.khong_ro);
         saveDetectionLog(label, score);
-        labelView.setText("Biển báo: " + label);
+        labelView.setText(getString(R.string.bien_bao_2c) + label);
         labelView.setTextSize(18);
         labelView.setTextColor(Color.BLACK);
         labelView.setPadding(0, 10, 0, 4);
         labelView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         TextView accView = new TextView(this);
-        accView.setText(String.format("Độ chính xác: %.1f%%", score * 100));
+        accView.setText(String.format(getString(R.string.do_chinh_xac)+"%.1f%%", score * 100));
         accView.setTextSize(14);
         accView.setTextColor(Color.GRAY);
         accView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

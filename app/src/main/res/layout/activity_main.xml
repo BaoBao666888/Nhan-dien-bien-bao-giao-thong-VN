@@ -19,7 +19,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_margin="16dp"
-        android:contentDescription="Cài đặt"
+        android:contentDescription="@string/cai_dat"
         android:src="@drawable/ic_setting"
         android:clickable="true"
         android:focusable="true"
@@ -51,7 +51,7 @@
                 <ImageView android:src="@android:drawable/ic_menu_info_details"
                     android:layout_width="24dp"
                     android:layout_height="24dp" />
-                <TextView android:text="Hướng dẫn"
+                <TextView android:text="@string/huong_dan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10sp" />
@@ -70,7 +70,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp" />
 
-                <TextView android:text="Thống kê"
+                <TextView android:text="@string/thong_ke"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10sp" />
@@ -108,7 +108,7 @@
                 <ImageView android:src="@android:drawable/ic_menu_camera"
                     android:layout_width="24dp"
                     android:layout_height="24dp" />
-                <TextView android:text="Trực tiếp"
+                <TextView android:text="@string/truc_tiep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10sp" />
@@ -125,7 +125,7 @@
                 <ImageView android:src="@android:drawable/ic_lock_power_off"
                     android:layout_width="24dp"
                     android:layout_height="24dp" />
-                <TextView android:text="Đăng xuất"
+                <TextView android:text="@string/dang_xuat"
                     android:id="@+id/text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -11,6 +11,7 @@ import android.content.ContentUris;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ import com.example.nhandienbienbao.Adapter.AlbumAdapter;
 
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Stack;
 import java.util.List;
 import com.example.nhandienbienbao.Helper.BottomNavHelper;
@@ -71,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int savedMode = prefs.getInt("theme_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         AppCompatDelegate.setDefaultNightMode(savedMode);
+        //--
+        String savedLanguage = prefs.getString("app_language", "vi");
+        Locale locale = new Locale(savedLanguage);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
         setContentView(R.layout.activity_main);
 
@@ -81,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         replaceFragment(new AlbumFragment(), R.id.bntAlbum);
+
+
 
         findViewById(R.id.bntAlbum).setOnClickListener(v -> {
             if (currentTabId != R.id.bntAlbum) {

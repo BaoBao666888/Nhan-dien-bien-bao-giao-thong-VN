@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.nhandienbienbao.LoginActivity;
+import com.example.nhandienbienbao.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -17,7 +18,7 @@ public class BottomNavHelper {
         TextView thoatText = thoatBtn.findViewById(idTextView);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        thoatText.setText(user == null ? "Đăng nhập" : "Đăng xuất");
+        thoatText.setText(user == null ? activity.getString(R.string.dang_nhap) : activity.getString(R.string.dang_xuat));
 
         thoatBtn.setOnClickListener(v -> {
             if (user == null) {
@@ -25,14 +26,14 @@ public class BottomNavHelper {
                 activity.finish();
             } else {
                 new AlertDialog.Builder(activity)
-                        .setTitle("Đăng xuất")
-                        .setMessage("Bạn có muốn đăng xuất không?")
-                        .setPositiveButton("Đăng xuất", (dialog, which) -> {
+                        .setTitle(activity.getString(R.string.dang_xuat))
+                        .setMessage(activity.getString(R.string.ban_co_muon_dang_xuat_khong))
+                        .setPositiveButton(activity.getString(R.string.dang_xuat), (dialog, which) -> {
                             FirebaseAuth.getInstance().signOut();
                             activity.startActivity(new Intent(activity, LoginActivity.class));
                             activity.finish();
                         })
-                        .setNegativeButton("Huỷ", null)
+                        .setNegativeButton(activity.getString(R.string.huy), null)
                         .show();
             }
         });
