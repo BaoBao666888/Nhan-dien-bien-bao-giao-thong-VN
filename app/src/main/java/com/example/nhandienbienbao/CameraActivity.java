@@ -233,7 +233,6 @@ public class CameraActivity extends AppCompatActivity {
 
         TextView labelView = new TextView(this);
         String label = (cls < classNames.size()) ? classNames.get(cls) : getString(R.string.khong_ro);
-        saveDetectionLog(label, score);
         labelView.setText(getString(R.string.bien_bao_2c) + " " + label);
         labelView.setTextSize(18);
         labelView.setTextColor(Color.BLACK);
@@ -250,6 +249,11 @@ public class CameraActivity extends AppCompatActivity {
         resultsContainer.addView(signView);
         resultsContainer.addView(labelView);
         resultsContainer.addView(accView);
+        String savedImageName = saveCroppedImage(cropped);
+        if (savedImageName != null) {
+            saveDetectionLog(label, score, savedImageName);
+        }
+
     }
 
     private Bitmap getBitmapFromUri(Uri uri) {
@@ -277,12 +281,13 @@ public class CameraActivity extends AppCompatActivity {
             }
         }
     }
-    private void saveDetectionLog(String label, float score) {
+    private void saveDetectionLog(String label, float score, String imageName) {
         String filename = "thongke.csv";
-        String line = String.format(Locale.getDefault(), "%s,%s,%.1f%%\n",
+        String line = String.format(Locale.getDefault(), "%s,%s,%.1f%%,%s\n",
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()),
                 label,
-                score * 100);
+                score * 100,
+                imageName);
 
         try {
             File file = new File(getExternalFilesDir(null), filename);
@@ -294,11 +299,34 @@ public class CameraActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     @Override
     public void finish() {
         setResult(RESULT_OK); // cho biết vừa nhận diện
         super.finish();
     }
 
+    private String saveCroppedImage(Bitmap croppedBitmap) {
+        try {
+            File croppedDir = getExternalFilesDir("Cropped");
+            if (croppedDir != null && !croppedDir.exists()) {
+                croppedDir.mkdirs();
+            }
+
+            String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+            String fileName = "cropped_" + timestamp + "_" + System.currentTimeMillis() + ".jpg";
+            File file = new File(croppedDir, fileName);
+
+            FileOutputStream out = new FileOutputStream(file);
+            croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+
+            return fileName;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }

@@ -51,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
     private Stack<Integer> fragmentBackStack = new Stack<>();
     private Uri selectedImageUri;
     private int currentTabId;
+    private int getTabOrder(int tabId) {
+        if (tabId == R.id.bntAlbum) return 2;
+        if (tabId == R.id.bntThongKe) return 1;
+        if (tabId == R.id.bntHuongDan) return 0;
+        if (tabId == R.id.bntTraCuu) return 3;
+        if (tabId == R.id.bntThoat) return 4;
+        return -1; // default
+    }
 
 
     // ActivityResultLauncher để chọn ảnh
@@ -125,9 +133,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.bntThoat).setOnClickListener(v -> {
-//            highlightBottomNav(R.id.bntThoat);
             BottomNavHelper.setupBottomNav(this, R.id.bntThoat, R.id.text);
-            // Xử lý logout
         });
 
         findViewById(R.id.bntSetting).setOnClickListener(v -> replaceFragment(new SettingFragment(), R.id.bntSetting));
@@ -155,18 +161,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void replaceFragment(Fragment fragment, int newTabId) {
         if (newTabId != currentTabId) {
-            boolean isRight = newTabId > currentTabId;
+            boolean isRight = getTabOrder(newTabId) > getTabOrder(currentTabId);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(
-                    isRight ? R.anim.slide_in_right : R.anim.slide_out_left,
+                    isRight ? R.anim.slide_in_right : R.anim.slide_in_left,
                     isRight ? R.anim.slide_out_left : R.anim.slide_out_right
             );
-            transaction.replace(R.id.fragmentContainer, fragment).commit();
+            transaction.setReorderingAllowed(true);
+            transaction.replace(R.id.fragmentContainer, fragment).commitAllowingStateLoss();
 
             //  Nếu không phải Album thì mới push vào fragmentBackStack
             if (currentTabId != R.id.bntAlbum) {
-                fragmentBackStack.clear();  // 👉 Chỉ cho 1 bước back
+                fragmentBackStack.clear();  //Chỉ cho 1 bước back
                 fragmentBackStack.push(currentTabId);
             }
 

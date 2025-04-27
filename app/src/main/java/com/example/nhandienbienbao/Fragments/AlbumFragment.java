@@ -1,5 +1,6 @@
 package com.example.nhandienbienbao.Fragments;
 
+import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -199,6 +200,18 @@ public class AlbumFragment extends Fragment {
                 actionBar.setVisibility(View.GONE);
             }
         }, 300);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101 && resultCode == Activity.RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+            if (selectedImageUri != null) {
+                Intent intent = new Intent(getContext(), CameraActivity.class);
+                intent.putExtra("image_uri", selectedImageUri);
+                startActivity(intent);
+            }
+        }
     }
 
 
