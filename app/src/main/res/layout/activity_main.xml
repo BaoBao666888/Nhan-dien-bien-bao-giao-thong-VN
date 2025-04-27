@@ -105,7 +105,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center">
-                <ImageView android:src="@android:drawable/ic_menu_camera"
+                <ImageView android:src="@drawable/ic_lookup"
                     android:layout_width="24dp"
                     android:layout_height="24dp" />
                 <TextView android:text="@string/tra_cuu"
