@@ -114,14 +114,14 @@ public class SettingFragment extends Fragment {
         // Gán sự kiện khi bật/tắt
         notificationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             prefs.edit().putBoolean("notifications_enabled", isChecked).apply();
-            Toast.makeText(getContext(), isChecked ? "Thông báo đã bật" : "Thông báo đã tắt", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), isChecked ? getString(R.string.thong_bao_da_bat) : getString(R.string.thong_bao_da_tat), Toast.LENGTH_SHORT).show();
         });
 
         Button updateButton = view.findViewById(R.id.update_button);
         updateButton.setOnClickListener(v -> {
             new AlertDialog.Builder(requireContext())
-                    .setTitle("Kiểm tra cập nhật")
-                    .setMessage("Bạn đang sử dụng phiên bản mới nhất.")
+                    .setTitle(getString(R.string.kiem_tra_cap_nhat))
+                    .setMessage(getString(R.string.ban_dang_su_dung_phien_ban_moi_nhat))
                     .setPositiveButton("OK", null)
                     .show();
         });
@@ -136,10 +136,10 @@ public class SettingFragment extends Fragment {
         Button resetSettingsButton = view.findViewById(R.id.reset_settings_button);
         resetSettingsButton.setOnClickListener(v -> {
             new AlertDialog.Builder(requireContext())
-                    .setTitle("Đặt lại cài đặt")
-                    .setMessage("Bạn có chắc muốn đặt lại toàn bộ cài đặt về mặc định không?")
-                    .setPositiveButton("Đặt lại", (dialog, which) -> resetSettings())
-                    .setNegativeButton("Huỷ", null)
+                    .setTitle(getString(R.string.dat_lai_cai_dat))
+                    .setMessage(getString(R.string.xac_nhan_dat_lai_cai_dat))
+                    .setPositiveButton(getString(R.string.dat_lai), (dialog, which) -> resetSettings())
+                    .setNegativeButton(getString(R.string.huy), null)
                     .show();
         });
 
@@ -154,7 +154,7 @@ public class SettingFragment extends Fragment {
         editor.putBoolean("notifications_enabled", false); // Tắt thông báo
         editor.apply();
 
-        Toast.makeText(requireContext(), "Đã đặt lại cài đặt mặc định", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), getString(R.string.da_dat_lai_cai_dat_mac_dinh), Toast.LENGTH_SHORT).show();
 
         requireActivity().recreate(); // Reload lại giao diện app (không cần exit app luôn)
     }

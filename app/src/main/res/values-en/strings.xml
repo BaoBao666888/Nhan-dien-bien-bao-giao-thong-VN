@@ -78,7 +78,26 @@
     <!-- English (en) -->
     <string name="o_to">Car</string>
     <string name="xe_may">Motorbike</string>
-    <string name="xe_dap_dien">Electric bicycle</string>
     <string name="tra_cuu">Search</string>
+
+    <!-- English -->
+    <string name="xe_may_dien">Electric motorbike</string>
+    <string name="ket_qua_se_hien_thi_o_day">Results will be displayed here</string>
+    <string name="nhap_bien_so_mau">Enter license plate (e.g., 30H16234)</string>
+    <string name="dang_tai_captcha_vui_long_cho">Loading captcha, please wait...</string>
+    <string name="nhap_bien_so_thong_bao">Enter license plate!</string>
+    <string name="xac_nhan_xoa_thong_ke">Are you sure you want to delete all statistics data?</string>
+    <string name="da_xoa_thong_ke">Statistics deleted</string>
+    <string name="khong_the_xoa">Cannot delete!</string>
+    <string name="thong_bao_da_bat">Notifications enabled</string>
+    <string name="thong_bao_da_tat">Notifications disabled</string>
+    <string name="kiem_tra_cap_nhat">Check for updates</string>
+    <string name="ban_dang_su_dung_phien_ban_moi_nhat">You are using the latest version.</string>
+    <string name="xac_nhan_dat_lai_cai_dat">Are you sure you want to reset all settings to default?</string>
+    <string name="dat_lai">Reset</string>
+    <string name="da_dat_lai_cai_dat_mac_dinh">Settings have been reset to default</string>
+
+
+
 
 </resources>

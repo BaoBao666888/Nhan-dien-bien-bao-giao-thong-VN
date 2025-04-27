@@ -60,8 +60,26 @@
     <!-- French (fr) -->
     <string name="o_to">Voiture</string>
     <string name="xe_may">Moto</string>
-    <string name="xe_dap_dien">Vélo électrique</string>
+
     <string name="tra_cuu">Rechercher</string>
+
+
+    <!-- French -->
+    <string name="xe_may_dien">Moto électrique</string>
+    <string name="ket_qua_se_hien_thi_o_day">Les résultats seront affichés ici</string>
+    <string name="nhap_bien_so_mau">Entrez le numéro d\'immatriculation (ex: 30H16234)</string>
+    <string name="dang_tai_captcha_vui_long_cho">Chargement du captcha, veuillez patienter...</string>
+    <string name="nhap_bien_so_thong_bao">Entrez la plaque d\'immatriculation !</string>
+    <string name="xac_nhan_xoa_thong_ke">Êtes-vous sûr de vouloir supprimer toutes les données statistiques ?</string>
+    <string name="da_xoa_thong_ke">Statistiques supprimées</string>
+    <string name="khong_the_xoa">Impossible de supprimer !</string>
+    <string name="thong_bao_da_bat">Notifications activées</string>
+    <string name="thong_bao_da_tat">Notifications désactivées</string>
+    <string name="kiem_tra_cap_nhat">Vérifier les mises à jour</string>
+    <string name="ban_dang_su_dung_phien_ban_moi_nhat">Vous utilisez la dernière version.</string>
+    <string name="xac_nhan_dat_lai_cai_dat">Êtes-vous sûr de vouloir réinitialiser tous les paramètres par défaut ?</string>
+    <string name="dat_lai">Réinitialiser</string>
+    <string name="da_dat_lai_cai_dat_mac_dinh">Les paramètres ont été réinitialisés aux valeurs par défaut</string>
 
 
 </resources>

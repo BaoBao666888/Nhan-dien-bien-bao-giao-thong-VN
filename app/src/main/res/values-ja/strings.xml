@@ -59,8 +59,24 @@
     <!-- Japanese (ja) -->
     <string name="o_to">自動車</string>
     <string name="xe_may">バイク</string>
-    <string name="xe_dap_dien">電動自転車</string>
+
     <string name="tra_cuu">検索</string>
 
+    <!-- Japanese -->
+    <string name="xe_may_dien">電動バイク</string>
+    <string name="ket_qua_se_hien_thi_o_day">結果がここに表示されます</string>
+    <string name="nhap_bien_so_mau">ナンバープレートを入力（例: 30H16234）</string>
+    <string name="dang_tai_captcha_vui_long_cho">キャプチャを読み込み中、少々お待ちください...</string>
+    <string name="nhap_bien_so_thong_bao">ナンバープレートを入力してください！</string>
+    <string name="xac_nhan_xoa_thong_ke">統計データをすべて削除してもよろしいですか？</string>
+    <string name="da_xoa_thong_ke">統計が削除されました</string>
+    <string name="khong_the_xoa">削除できません！</string>
+    <string name="thong_bao_da_bat">通知が有効になりました</string>
+    <string name="thong_bao_da_tat">通知が無効になりました</string>
+    <string name="kiem_tra_cap_nhat">更新を確認する</string>
+    <string name="ban_dang_su_dung_phien_ban_moi_nhat">最新バージョンを使用しています。</string>
+    <string name="xac_nhan_dat_lai_cai_dat">すべての設定をデフォルトにリセットしてもよろしいですか？</string>
+    <string name="dat_lai">リセット</string>
+    <string name="da_dat_lai_cai_dat_mac_dinh">設定がデフォルトにリセットされました</string>
 
 </resources>

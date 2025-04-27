@@ -148,20 +148,20 @@ public class ThongKeFragment extends Fragment {
 
     private void confirmClearStats() {
         new AlertDialog.Builder(requireContext())
-                .setTitle("Xoá thống kê")
-                .setMessage("Bạn có chắc muốn xoá toàn bộ dữ liệu thống kê không?")
-                .setPositiveButton("Xoá", (dialog, which) -> {
+                .setTitle(getString(R.string.xoa_thong_ke))
+                .setMessage(getString(R.string.xac_nhan_xoa_thong_ke))
+                .setPositiveButton(getString(R.string.xoa), (dialog, which) -> {
                     if (fileThongKe.exists() && fileThongKe.delete()) {
                         File croppedFolder = new File(requireContext().getExternalFilesDir(null), "cropped");
                         deleteFolder(croppedFolder);
                         thongKeItems.clear();
                         adapter.updateData(new ArrayList<>(thongKeItems));
-                        Toast.makeText(requireContext(), "Đã xoá thống kê!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getText(R.string.da_xoa_thong_ke), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(requireContext(), "Không thể xoá!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(),getString(R.string.khong_the_xoa), Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton("Huỷ", null)
+                .setNegativeButton(getString(R.string.huy), null)
                 .show();
     }
 

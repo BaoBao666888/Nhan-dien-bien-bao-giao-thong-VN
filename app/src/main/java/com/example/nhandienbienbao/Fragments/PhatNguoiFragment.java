@@ -76,7 +76,7 @@ public class PhatNguoiFragment extends Fragment {
     }
 
     private void setupSpinner() {
-        String[] loaiXeArray = {"Ô tô", "Xe máy", "Xe máy điện"};
+        String[] loaiXeArray = {getString(R.string.o_to), getString(R.string.xe_may), getString(R.string.xe_may_dien)};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, loaiXeArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLoaiXe.setAdapter(adapter);
@@ -146,12 +146,12 @@ public class PhatNguoiFragment extends Fragment {
     private void setupTraCuuButton() {
         btnTraCuu.setOnClickListener(v -> {
             if (turnstileToken.isEmpty()) {
-                Toast.makeText(getContext(), "Đang tải captcha, vui lòng chờ...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.dang_tai_captcha_vui_long_cho), Toast.LENGTH_SHORT).show();
                 return;
             }
             String bienSo = edtBienSo.getText().toString().trim();
             if (bienSo.isEmpty()) {
-                Toast.makeText(getContext(), "Nhập biển số!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.nhap_bien_so_thong_bao), Toast.LENGTH_SHORT).show();
                 return;
             }
             int loaixe = spinnerLoaiXe.getSelectedItemPosition() + 1;

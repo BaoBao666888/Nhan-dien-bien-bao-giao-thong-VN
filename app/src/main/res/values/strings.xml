@@ -16,12 +16,6 @@
         <item>@string/toi</item>
     </string-array>
 
-    <string-array name="loai_xe_array">
-        <item>@string/o_to</item>
-        <item>@string/xe_may</item>
-        <item>@string/xe_dap_dien</item>
-    </string-array>
-
     <!-- Và thêm vào strings.xml các dòng này: -->
     <string name="theo_he_thong">Theo hệ thống</string>
     <string name="sang">Sáng</string>
@@ -56,6 +50,13 @@
     <string name="thong_bao">Thông báo</string>
     <string name="quan_ly">Quản lý</string>
     <string name="kiem_tra">Kiểm tra</string>
+    <string name="thong_bao_da_bat">Thông báo đã bật</string>
+    <string name="thong_bao_da_tat">Thông báo đã tắt</string>
+    <string name="kiem_tra_cap_nhat">Kiểm tra cập nhật</string>
+    <string name="ban_dang_su_dung_phien_ban_moi_nhat">Bạn đang sử dụng phiên bản mới nhất.</string>
+    <string name="xac_nhan_dat_lai_cai_dat">Bạn có chắc muốn đặt lại toàn bộ cài đặt về mặc định không?</string>
+    <string name="dat_lai">Đặt lại</string>
+    <string name="da_dat_lai_cai_dat_mac_dinh">Đã đặt lại cài đặt về mặc định</string>
 
     <!-- Album -->
     <string name="chon_anh">Chọn ảnh</string>
@@ -66,6 +67,9 @@
     <string name="tieu_de_thong_ke">Thống kê</string>
     <string name="xoa_thong_ke">Xoá thống kê</string>
     <string name="chua_co_thong_ke">Chưa có thống kê nào.</string>
+    <string name="xac_nhan_xoa_thong_ke">Bạn có chắc muốn xoá toàn bộ dữ liệu thống kê không?</string>
+    <string name="da_xoa_thong_ke">Đã xoá thống kê</string>
+    <string name="khong_the_xoa">Không thể xoá!</string>
 
     <!-- Login/Register -->
     <string name="dang_ky">Đăng ký</string>
@@ -83,8 +87,11 @@
     <!-- Tra Cứu -->
     <string name="o_to">Ô tô</string>
     <string name="xe_may">Xe máy</string>
-    <string name="xe_dap_dien">Xe đạp điện</string>
-
+    <string name="xe_may_dien">Xe máy điện</string>
+    <string name="ket_qua_se_hien_thi_o_day">Kết quả sẽ hiển thị ở đây</string>
+    <string name="nhap_bien_so_mau">Nhập biển số (VD: 30H16234)</string>
+    <string name="dang_tai_captcha_vui_long_cho">Đang tải captcha, vui lòng chờ...</string>
+    <string name="nhap_bien_so_thong_bao">Nhập biển số!</string>
     <!-- Others -->
 
     <string name="chon_tat_ca">Chọn tất cả</string>

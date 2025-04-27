@@ -59,6 +59,23 @@
     <!-- Chinese Simplified (zh) -->
     <string name="o_to">汽车</string>
     <string name="xe_may">摩托车</string>
-    <string name="xe_dap_dien">电动自行车</string>
+
     <string name="tra_cuu">查询</string>
+
+    <!-- Chinese Simplified -->
+    <string name="xe_may_dien">电动摩托车</string>
+    <string name="ket_qua_se_hien_thi_o_day">结果将在这里显示</string>
+    <string name="nhap_bien_so_mau">输入车牌号（例如：30H16234）</string>
+    <string name="dang_tai_captcha_vui_long_cho">正在加载验证码，请稍等...</string>
+    <string name="nhap_bien_so_thong_bao">请输入车牌号！</string>
+    <string name="xac_nhan_xoa_thong_ke">确定要删除所有统计数据吗？</string>
+    <string name="da_xoa_thong_ke">已删除统计数据</string>
+    <string name="khong_the_xoa">无法删除！</string>
+    <string name="thong_bao_da_bat">通知已启用</string>
+    <string name="thong_bao_da_tat">通知已关闭</string>
+    <string name="kiem_tra_cap_nhat">检查更新</string>
+    <string name="ban_dang_su_dung_phien_ban_moi_nhat">您正在使用最新版本。</string>
+    <string name="xac_nhan_dat_lai_cai_dat">确定要将所有设置恢复为默认值吗？</string>
+    <string name="dat_lai">重置</string>
+    <string name="da_dat_lai_cai_dat_mac_dinh">设置已恢复为默认值</string>
 </resources>

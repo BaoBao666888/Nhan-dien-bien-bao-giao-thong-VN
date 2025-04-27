@@ -59,8 +59,25 @@
     <!-- Spanish (es) -->
     <string name="o_to">Automóvil</string>
     <string name="xe_may">Motocicleta</string>
-    <string name="xe_dap_dien">Bicicleta eléctrica</string>
+
     <string name="tra_cuu">Consultar</string>
+
+    <!-- Spanish -->
+    <string name="xe_may_dien">Moto eléctrica</string>
+    <string name="ket_qua_se_hien_thi_o_day">Los resultados se mostrarán aquí</string>
+    <string name="nhap_bien_so_mau">Introduzca la matrícula (ej.: 30H16234)</string>
+    <string name="dang_tai_captcha_vui_long_cho">Cargando captcha, por favor espere...</string>
+    <string name="nhap_bien_so_thong_bao">¡Introduzca la matrícula!</string>
+    <string name="xac_nhan_xoa_thong_ke">¿Está seguro de que desea eliminar todos los datos estadísticos?</string>
+    <string name="da_xoa_thong_ke">Estadísticas eliminadas</string>
+    <string name="khong_the_xoa">¡No se puede eliminar!</string>
+    <string name="thong_bao_da_bat">Notificaciones activadas</string>
+    <string name="thong_bao_da_tat">Notificaciones desactivadas</string>
+    <string name="kiem_tra_cap_nhat">Buscar actualizaciones</string>
+    <string name="ban_dang_su_dung_phien_ban_moi_nhat">Está utilizando la versión más reciente.</string>
+    <string name="xac_nhan_dat_lai_cai_dat">¿Está seguro de que desea restablecer todos los ajustes a los valores predeterminados?</string>
+    <string name="dat_lai">Restablecer</string>
+    <string name="da_dat_lai_cai_dat_mac_dinh">Configuraciones restablecidas a valores predeterminados</string>
 
 
 
