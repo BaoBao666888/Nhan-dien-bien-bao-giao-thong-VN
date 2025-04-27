@@ -55,4 +55,10 @@
     <string name="bien_bao_2c">交通标志: </string>
     <string name="do_chinh_xac">准确率: </string>
     <string name="quay_lai">返回</string>
+
+    <!-- Chinese Simplified (zh) -->
+    <string name="o_to">汽车</string>
+    <string name="xe_may">摩托车</string>
+    <string name="xe_dap_dien">电动自行车</string>
+    <string name="tra_cuu">查询</string>
 </resources>

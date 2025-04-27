@@ -5,6 +5,10 @@ public class ThongKeItem {
     public String label;
     public String accuracy;
     public String imageName;
+    public String getTenBienBao() {
+        return label;
+    }
+
 
     public ThongKeItem(String time, String label, String accuracy, String imageName) {
         this.time = time;

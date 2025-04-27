@@ -39,30 +39,41 @@ public class AlbumFragment extends Fragment {
     private RecyclerView recyclerView;
     private Button btnSelectAll;
     private Button btnDelete;
+    private ActivityResultLauncher<Intent> pickImageLauncher;
+
     private Button btnCancel;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_album, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerAlbum);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-
-        adapter = new AlbumAdapter(getContext(), loadImagesFromGallery(getContext()));
-        recyclerView.setAdapter(adapter);
 
         actionBar = view.findViewById(R.id.bottomActionBar);
         btnSelectAll = view.findViewById(R.id.btnSelectAll);
         btnDelete = view.findViewById(R.id.btnDelete);
         btnCancel = view.findViewById(R.id.btnCancel);
 
-        setupButtons();
+        //chưa gán adapter, chỉ để khung RecyclerView
 
-        adapter.setSelectionChangeListener(() -> {
-            actionBar.setVisibility(View.VISIBLE);
-        });
+        loadImagesAsync(); //tải hình nền
+
+        setupButtons();
+        pickImageLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                        Uri selectedImage = result.getData().getData();
+                        if (selectedImage != null) {
+                            Intent intent = new Intent(getContext(), CameraActivity.class);
+                            intent.putExtra("image_uri", selectedImage);
+                            startActivity(intent);
+                        }
+                    }
+                }
+        );
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
@@ -70,18 +81,36 @@ public class AlbumFragment extends Fragment {
             startActivity(intent);
         });
 
-
         FrameLayout frameChonAnh = view.findViewById(R.id.frame_chon_anh);
-        frameChonAnh.setOnClickListener(v -> openGallery());
+        frameChonAnh.setOnClickListener(v -> {
+            openGallery();
+        });
+
 
         return view;
+    }
+
+    private void loadImagesAsync() {
+        new Thread(() -> {
+            List<Uri> imageUris = loadImagesFromGallery(getContext());
+
+            requireActivity().runOnUiThread(() -> {
+                adapter = new AlbumAdapter(getContext(), imageUris);
+                recyclerView.setAdapter(adapter);
+
+                adapter.setSelectionChangeListener(() -> {
+                    actionBar.setVisibility(View.VISIBLE);
+                });
+            });
+        }).start();
     }
 
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
-        startActivityForResult(intent, 101);
+        pickImageLauncher.launch(intent);
     }
+
 
     private List<Uri> loadImagesFromGallery(Context context) {
         List<Uri> imageUris = new ArrayList<>();
@@ -109,40 +138,11 @@ public class AlbumFragment extends Fragment {
         return imageUris;
     }
 
-    private void setupButtons(View view) {
-        view.findViewById(R.id.btnSelectAll).setOnClickListener(v -> {
-            boolean selectAll = !adapter.areAllSelected();
-            if (selectAll) {
-                adapter.selectAll();
-            } else {
-                adapter.clearSelection();
-            }
-        });
-
-        view.findViewById(R.id.btnCancel).setOnClickListener(v -> {
-            adapter.clearSelection();
-            actionBar.setVisibility(View.GONE);
-        });
-
-        view.findViewById(R.id.btnDelete).setOnClickListener(v -> {
-            List<Uri> selected = adapter.getSelectedUris();
-            if (selected.isEmpty()) return;
-
-            for (Uri uri : selected) {
-                requireContext().getContentResolver().delete(uri, null, null);
-            }
-            Toast.makeText(getContext(), getString(R.string.da_xoa_anh), Toast.LENGTH_SHORT).show();
-            adapter.updateData(loadImagesFromGallery(getContext()));
-            actionBar.setVisibility(View.GONE);
-        });
-    }
     @Override
     public void onResume() {
         super.onResume();
         refreshAlbumIfNeeded();
     }
-
-
 
     private void setupButtons() {
         btnSelectAll.setOnClickListener(v -> {
@@ -187,6 +187,8 @@ public class AlbumFragment extends Fragment {
     }
 
     private void refreshAlbumIfNeeded() {
+        if (adapter == null) return; // Nếu chưa load xong adapter thì thôi, tránh crash
+
         List<Uri> newUris = loadImagesFromGallery(getContext());
         if (!newUris.equals(oldImageUris)) {
             adapter.updateData(newUris);
@@ -201,19 +203,6 @@ public class AlbumFragment extends Fragment {
             }
         }, 300);
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 101 && resultCode == Activity.RESULT_OK && data != null) {
-            Uri selectedImageUri = data.getData();
-            if (selectedImageUri != null) {
-                Intent intent = new Intent(getContext(), CameraActivity.class);
-                intent.putExtra("image_uri", selectedImageUri);
-                startActivity(intent);
-            }
-        }
-    }
-
 
 
 }

@@ -55,4 +55,12 @@
     <string name="bien_bao_2c">标记：</string>
     <string name="do_chinh_xac">精度：</string>
     <string name="quay_lai">戻る</string>
+
+    <!-- Japanese (ja) -->
+    <string name="o_to">自動車</string>
+    <string name="xe_may">バイク</string>
+    <string name="xe_dap_dien">電動自転車</string>
+    <string name="tra_cuu">検索</string>
+
+
 </resources>

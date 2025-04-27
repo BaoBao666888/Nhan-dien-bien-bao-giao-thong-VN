@@ -99,13 +99,13 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        replaceFragment(new AlbumFragment(), R.id.bntAlbum);
+        replaceFragment(new AlbumFragment(), R.id.bntAlbum, false);
 
 
 
         findViewById(R.id.bntAlbum).setOnClickListener(v -> {
             if (currentTabId != R.id.bntAlbum) {
-                replaceFragment(new AlbumFragment(), R.id.bntAlbum);
+                replaceFragment(new AlbumFragment(), R.id.bntAlbum, true);
                 highlightBottomNav(R.id.bntAlbum);
             }
         });
@@ -113,53 +113,52 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.bntHuongDan).setOnClickListener(v -> {
             if (currentTabId != R.id.bntHuongDan){
-                replaceFragment(new InstructFragment(), R.id.bntHuongDan);
+                replaceFragment(new InstructFragment(), R.id.bntHuongDan, true);
                 highlightBottomNav(R.id.bntHuongDan);
             }
         });
 
         findViewById(R.id.bntThongKe).setOnClickListener(v -> {
             if (currentTabId != R.id.bntThongKe) {
-                replaceFragment(new ThongKeFragment(), R.id.bntThongKe);
+                replaceFragment(new ThongKeFragment(), R.id.bntThongKe, true);
                 highlightBottomNav(R.id.bntThongKe);
             }
         });
 
         findViewById(R.id.bntTraCuu).setOnClickListener(v -> {
             if (currentTabId != R.id.bntTraCuu) {
-                replaceFragment(new PhatNguoiFragment(), R.id.bntTraCuu);
+                replaceFragment(new PhatNguoiFragment(), R.id.bntTraCuu, true);
                 highlightBottomNav(R.id.bntTraCuu);
             }
         });
 
         findViewById(R.id.bntThoat).setOnClickListener(v -> {
-            BottomNavHelper.setupBottomNav(this, R.id.bntThoat, R.id.text);
+            BottomNavHelper.handleLogout(this);
         });
 
-        findViewById(R.id.bntSetting).setOnClickListener(v -> replaceFragment(new SettingFragment(), R.id.bntSetting));
+        findViewById(R.id.bntSetting).setOnClickListener(v -> replaceFragment(new SettingFragment(), R.id.bntSetting, true));
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 if (!fragmentBackStack.isEmpty()) {
                     int lastTabId = fragmentBackStack.pop();
-                    replaceFragment(new AlbumFragment(), R.id.bntAlbum);
+                    replaceFragment(new AlbumFragment(), R.id.bntAlbum, false);
                 } else {
-                    // Nếu đang ở Album thì thoát app
                     if (currentTabId == R.id.bntAlbum) {
                         finish();
                     } else {
-                        replaceFragment(new AlbumFragment(), R.id.bntAlbum);
+                        replaceFragment(new AlbumFragment(), R.id.bntAlbum, false);
                     }
                 }
+
             }
         });
 
 
     }
 
-
-    private void replaceFragment(Fragment fragment, int newTabId) {
+    private void replaceFragment(Fragment fragment, int newTabId, boolean addToBackStack) {
         if (newTabId != currentTabId) {
             boolean isRight = getTabOrder(newTabId) > getTabOrder(currentTabId);
 
@@ -171,20 +170,23 @@ public class MainActivity extends AppCompatActivity {
             transaction.setReorderingAllowed(true);
             transaction.replace(R.id.fragmentContainer, fragment).commitAllowingStateLoss();
 
-            //  Nếu không phải Album thì mới push vào fragmentBackStack
-            if (currentTabId != R.id.bntAlbum) {
-                fragmentBackStack.clear();  //Chỉ cho 1 bước back
-                fragmentBackStack.push(currentTabId);
+            int oldTabId = currentTabId;
+            currentTabId = newTabId;
+
+            // 🛠 chỉ push vào backstack nếu addToBackStack = true
+            if (addToBackStack && oldTabId != R.id.bntAlbum && oldTabId != 0) {
+                fragmentBackStack.clear();
+                fragmentBackStack.push(oldTabId);
             }
 
             highlightBottomNav(newTabId);
 
             ImageView settingBtn = findViewById(R.id.bntSetting);
             settingBtn.setVisibility(fragment instanceof SettingFragment ? View.GONE : View.VISIBLE);
-
-            currentTabId = newTabId;
         }
     }
+
+
 
 
     private List<Uri> loadImagesFromGallery() {
@@ -213,11 +215,6 @@ public class MainActivity extends AppCompatActivity {
         return imageUris;
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -253,4 +250,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavHelper.updateThoatText(findViewById(R.id.text), this);
+    }
+
 }

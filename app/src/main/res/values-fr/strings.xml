@@ -55,4 +55,13 @@
     <string name="bien_bao_2c">Panneau : </string>
     <string name="do_chinh_xac">Précision : </string>
     <string name="quay_lai">Retour</string>
+
+
+    <!-- French (fr) -->
+    <string name="o_to">Voiture</string>
+    <string name="xe_may">Moto</string>
+    <string name="xe_dap_dien">Vélo électrique</string>
+    <string name="tra_cuu">Rechercher</string>
+
+
 </resources>

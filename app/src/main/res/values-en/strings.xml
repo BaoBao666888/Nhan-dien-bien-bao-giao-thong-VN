@@ -75,5 +75,10 @@
     <string name="do_chinh_xac">Accuracy: </string>
     <string name="quay_lai">Go back</string>
 
+    <!-- English (en) -->
+    <string name="o_to">Car</string>
+    <string name="xe_may">Motorbike</string>
+    <string name="xe_dap_dien">Electric bicycle</string>
+    <string name="tra_cuu">Search</string>
 
 </resources>

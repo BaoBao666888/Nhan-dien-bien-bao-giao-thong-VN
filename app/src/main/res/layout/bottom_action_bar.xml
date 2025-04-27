@@ -1,31 +1,44 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/bottomActionBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center"
     android:padding="8dp"
-    android:background="#EEEEEE"
-    android:visibility="gone">
+    android:background="#FFF6FB"
+    android:visibility="gone"
+    android:weightSum="3">
 
     <Button
         android:id="@+id/btnSelectAll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/chon_tat_ca" />
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="@android:color/white"
+        android:text="@string/chon_tat_ca"
+        android:background="@drawable/rounded_button"/>
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/xoa" />
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#F44336"
+        android:textColor="@android:color/white"
+        android:text="@string/xoa"
+        android:background="@drawable/rounded_button"/>
 
     <Button
         android:id="@+id/btnCancel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/huy" />
+        android:backgroundTint="#9E9E9E"
+        android:textColor="@android:color/white"
+        android:text="@string/huy"
+        android:background="@drawable/rounded_button"/>
 </LinearLayout>

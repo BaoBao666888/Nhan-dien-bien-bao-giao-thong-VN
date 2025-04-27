@@ -13,29 +13,33 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class BottomNavHelper {
-    public static void setupBottomNav(Activity activity, int idThoat, int idTextView) {
-        LinearLayout thoatBtn = activity.findViewById(idThoat);
-        TextView thoatText = thoatBtn.findViewById(idTextView);
 
+    public static void handleLogout(Activity activity) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        thoatText.setText(user == null ? activity.getString(R.string.dang_nhap) : activity.getString(R.string.dang_xuat));
+        if (user == null) {
+            activity.startActivity(new Intent(activity, LoginActivity.class));
+            activity.finish();
+        } else {
+            new AlertDialog.Builder(activity)
+                    .setTitle(activity.getString(R.string.dang_xuat))
+                    .setMessage(activity.getString(R.string.ban_co_muon_dang_xuat_khong))
+                    .setPositiveButton(activity.getString(R.string.dang_xuat), (dialog, which) -> {
+                        FirebaseAuth.getInstance().signOut();
+                        activity.startActivity(new Intent(activity, LoginActivity.class));
+                        activity.finish();
+                    })
+                    .setNegativeButton(activity.getString(R.string.huy), null)
+                    .show();
+        }
+    }
 
-        thoatBtn.setOnClickListener(v -> {
-            if (user == null) {
-                activity.startActivity(new Intent(activity, LoginActivity.class));
-                activity.finish();
-            } else {
-                new AlertDialog.Builder(activity)
-                        .setTitle(activity.getString(R.string.dang_xuat))
-                        .setMessage(activity.getString(R.string.ban_co_muon_dang_xuat_khong))
-                        .setPositiveButton(activity.getString(R.string.dang_xuat), (dialog, which) -> {
-                            FirebaseAuth.getInstance().signOut();
-                            activity.startActivity(new Intent(activity, LoginActivity.class));
-                            activity.finish();
-                        })
-                        .setNegativeButton(activity.getString(R.string.huy), null)
-                        .show();
-            }
-        });
+    public static void updateThoatText(TextView thoatText, Activity activity) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            thoatText.setText(activity.getString(R.string.dang_nhap));
+        } else {
+            thoatText.setText(activity.getString(R.string.dang_xuat));
+        }
     }
 }
+

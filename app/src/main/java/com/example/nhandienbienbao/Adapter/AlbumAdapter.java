@@ -77,13 +77,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         });
 
         holder.image.setOnLongClickListener(v -> {
-            multiSelectMode = true;
-            notifyDataSetChanged();
-            if (selectionChangeListener != null) {
-                selectionChangeListener.onMultiSelectStarted();
+            if (!multiSelectMode) {
+                multiSelectMode = true;
+                notifyItemRangeChanged(0, imageUris.size());
+                if (selectionChangeListener != null) {
+                    selectionChangeListener.onMultiSelectStarted();
+                }
             }
             return true;
         });
+
 
 
         holder.checkBox.setOnClickListener(v -> {

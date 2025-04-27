@@ -1,5 +1,6 @@
 package com.example.nhandienbienbao.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,11 +18,12 @@ import com.example.nhandienbienbao.Models.ThongKeItem;
 import com.example.nhandienbienbao.R;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ThongKeAdapter extends RecyclerView.Adapter<ThongKeAdapter.ThongKeViewHolder> {
 
-    private final List<ThongKeItem> thongKeList;
+    private List<ThongKeItem> thongKeList;
     private final Context context;
 
     public ThongKeAdapter(Context context, List<ThongKeItem> thongKeList) {
@@ -41,7 +43,7 @@ public class ThongKeAdapter extends RecyclerView.Adapter<ThongKeAdapter.ThongKeV
         ThongKeItem item = thongKeList.get(position);
 
         holder.textLabel.setText(item.label);
-        holder.textAccuracy.setText("Độ chính xác: " + item.accuracy);
+        holder.textAccuracy.setText(context.getString(R.string.do_chinh_xac) + " " + item.accuracy);
         holder.textTime.setText(item.time);
 
         File imageFile = new File(context.getExternalFilesDir("Cropped"), item.imageName);
@@ -71,4 +73,10 @@ public class ThongKeAdapter extends RecyclerView.Adapter<ThongKeAdapter.ThongKeV
             textTime = itemView.findViewById(R.id.textTime);
         }
     }
+    public void updateData(List<ThongKeItem> newList) {
+        thongKeList = new ArrayList<>(newList); // ⚡ copy list mới
+        notifyDataSetChanged();
+    }
+
+
 }

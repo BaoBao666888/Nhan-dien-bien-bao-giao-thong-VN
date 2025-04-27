@@ -1,22 +1,27 @@
 package com.example.nhandienbienbao.Fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.example.nhandienbienbao.R;
-
+import android.widget.Toast;
 import java.util.Locale;
 
 public class SettingFragment extends Fragment {
@@ -100,8 +105,61 @@ public class SettingFragment extends Fragment {
             default: languageSpinner.setSelection(0);
         }
 
+        Switch notificationSwitch = view.findViewById(R.id.notification_switch);
+
+        // Load trạng thái từ SharedPreferences
+        boolean notificationsEnabled = prefs.getBoolean("notifications_enabled", true);
+        notificationSwitch.setChecked(notificationsEnabled);
+
+        // Gán sự kiện khi bật/tắt
+        notificationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.edit().putBoolean("notifications_enabled", isChecked).apply();
+            Toast.makeText(getContext(), isChecked ? "Thông báo đã bật" : "Thông báo đã tắt", Toast.LENGTH_SHORT).show();
+        });
+
+        Button updateButton = view.findViewById(R.id.update_button);
+        updateButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Kiểm tra cập nhật")
+                    .setMessage("Bạn đang sử dụng phiên bản mới nhất.")
+                    .setPositiveButton("OK", null)
+                    .show();
+        });
+
+        Button accessPermissionButton = view.findViewById(R.id.access_permission_button);
+        accessPermissionButton.setOnClickListener(v -> {
+            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(Uri.parse("package:" + requireContext().getPackageName()));
+            startActivity(intent);
+        });
+
+        Button resetSettingsButton = view.findViewById(R.id.reset_settings_button);
+        resetSettingsButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Đặt lại cài đặt")
+                    .setMessage("Bạn có chắc muốn đặt lại toàn bộ cài đặt về mặc định không?")
+                    .setPositiveButton("Đặt lại", (dialog, which) -> resetSettings())
+                    .setNegativeButton("Huỷ", null)
+                    .show();
+        });
+
+
         return view;
     }
+    private void resetSettings() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("app_language", "vi"); // Trả ngôn ngữ về tiếng Việt
+        editor.putInt("theme_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM); // Giao diện theo hệ thống
+        editor.putBoolean("notifications_enabled", false); // Tắt thông báo
+        editor.apply();
+
+        Toast.makeText(requireContext(), "Đã đặt lại cài đặt mặc định", Toast.LENGTH_SHORT).show();
+
+        requireActivity().recreate(); // Reload lại giao diện app (không cần exit app luôn)
+    }
+
+
 
     @Override
     public void onDestroyView() {
@@ -109,6 +167,7 @@ public class SettingFragment extends Fragment {
         if (!initialLanguage.equals(selectedLanguage)) {
             applyNewLanguage(selectedLanguage);
         }
+
     }
 
     private void applyNewLanguage(String languageCode) {

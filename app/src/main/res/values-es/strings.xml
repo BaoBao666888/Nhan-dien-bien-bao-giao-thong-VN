@@ -55,4 +55,13 @@
     <string name="bien_bao_2c">Señal: </string>
     <string name="do_chinh_xac">Precisión: </string>
     <string name="quay_lai">Volver</string>
+
+    <!-- Spanish (es) -->
+    <string name="o_to">Automóvil</string>
+    <string name="xe_may">Motocicleta</string>
+    <string name="xe_dap_dien">Bicicleta eléctrica</string>
+    <string name="tra_cuu">Consultar</string>
+
+
+
 </resources>

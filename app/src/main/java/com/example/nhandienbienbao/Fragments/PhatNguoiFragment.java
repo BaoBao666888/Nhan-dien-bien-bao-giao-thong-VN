@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -41,19 +43,16 @@ public class PhatNguoiFragment extends Fragment {
     private RecyclerView recyclerKetQua;
     private ArrayList<Violation> violationsList;
     private TextView txtThongKeKetQua;
-
     private ViolationAdapter adapter;
     private EditText edtBienSo;
     private Spinner spinnerLoaiXe;
     private ImageView btnLoadCaptcha;
     private Button btnTraCuu;
-    private TextView txtKetQua;
     private String turnstileToken = "";
     private Handler handler = new Handler();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_phatnguoi, container, false);
 
         edtBienSo = view.findViewById(R.id.edtBienSo);
@@ -67,8 +66,6 @@ public class PhatNguoiFragment extends Fragment {
         recyclerKetQua.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerKetQua.setAdapter(adapter);
         txtThongKeKetQua = view.findViewById(R.id.txtThongKeKetQua);
-
-
 
         setupSpinner();
         setupWebViewForCaptcha();
@@ -90,6 +87,10 @@ public class PhatNguoiFragment extends Fragment {
         settings.setJavaScriptEnabled(true);
         webCaptcha.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
+                webCaptcha.evaluateJavascript(
+                        "(function() { var elems = document.querySelectorAll('iframe, object, embed, video'); elems.forEach(e => e.remove()); })();",
+                        null
+                );
                 checkTurnstileTokenLoop();
             }
         });
@@ -98,11 +99,26 @@ public class PhatNguoiFragment extends Fragment {
 
     private void setupLoadCaptchaButton() {
         btnLoadCaptcha.setOnClickListener(v -> {
-            btnLoadCaptcha.setImageResource(R.drawable.ic_loading); // đổi thành icon loading
             turnstileToken = "";
+            btnLoadCaptcha.setImageResource(R.drawable.ic_loading);
+            startRotateAnimation();
             webCaptcha.reload();
             checkTurnstileTokenLoop();
         });
+    }
+
+    private void startRotateAnimation() {
+        RotateAnimation rotate = new RotateAnimation(
+                0, 360,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        rotate.setDuration(1000);
+        rotate.setRepeatCount(Animation.INFINITE);
+        btnLoadCaptcha.startAnimation(rotate);
+    }
+
+    private void stopRotateAnimation() {
+        btnLoadCaptcha.clearAnimation();
     }
 
     private void checkTurnstileTokenLoop() {
@@ -115,10 +131,11 @@ public class PhatNguoiFragment extends Fragment {
                             value = value.replace("\"", "").trim();
                             if (!value.isEmpty() && !value.equals("null")) {
                                 turnstileToken = value;
-                                btnLoadCaptcha.setImageResource(R.drawable.ic_success); // đổi thành icon thành công
+                                stopRotateAnimation();
+                                btnLoadCaptcha.setImageResource(R.drawable.ic_success);
                                 Log.d("TOKEN", "Turnstile Token OK: " + turnstileToken);
                             } else {
-                                handler.postDelayed(this, 1000); // chưa có, tiếp tục kiểm tra
+                                handler.postDelayed(this, 1000);
                             }
                         }
                 );
@@ -137,7 +154,7 @@ public class PhatNguoiFragment extends Fragment {
                 Toast.makeText(getContext(), "Nhập biển số!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            int loaixe = spinnerLoaiXe.getSelectedItemPosition() + 1; // 0->1, 1->2, 2->3
+            int loaixe = spinnerLoaiXe.getSelectedItemPosition() + 1;
             traCuuPhatNguoi(bienSo, turnstileToken, loaixe);
         });
     }
@@ -178,11 +195,11 @@ public class PhatNguoiFragment extends Fragment {
                     is.close();
                     parseResult(sb.toString());
                 } else {
-                    requireActivity().runOnUiThread(() -> txtKetQua.setText("Lỗi server: " + responseCode));
+                    requireActivity().runOnUiThread(() -> txtThongKeKetQua.setText("Lỗi server: " + responseCode));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                requireActivity().runOnUiThread(() -> txtKetQua.setText("Lỗi kết nối: " + e.getMessage()));
+                requireActivity().runOnUiThread(() -> txtThongKeKetQua.setText("Lỗi kết nối: " + e.getMessage()));
             }
         }).start();
     }
@@ -200,24 +217,22 @@ public class PhatNguoiFragment extends Fragment {
                 if (data.has("message") && data.getString("message").contains("Không có kết quả")) {
                     violationsList.clear();
                     adapter.notifyDataSetChanged();
-                    txtThongKeKetQua.setText("❌ " + data.getString("message"));
+                    txtThongKeKetQua.setText("Error: " + data.getString("message"));
+                    resetCaptcha();
                     return;
                 }
 
-                // 👉 Parse số lượng
                 int totalViolations = data.optInt("totalViolations", 0);
                 int unhandledCount = data.optInt("unhandledCount", 0);
                 int handledCount = totalViolations - unhandledCount;
 
-                String thongke = "✅ Tổng lỗi: " + totalViolations +
-                        "\n✅ Chưa xử phạt: " + unhandledCount +
-                        "\n✅ Đã xử phạt: " + handledCount;
+                String thongke = "Tổng lỗi: " + totalViolations +
+                        "\nChưa xử phạt: " + unhandledCount +
+                        "\nĐã xử phạt: " + handledCount;
                 txtThongKeKetQua.setText(thongke);
 
-                // Parse từng lỗi
                 violationsList.clear();
                 JSONArray violations = data.getJSONArray("violations");
-                Log.i("JSON VIOLATIONS", violations.toString());
                 for (int i = 0; i < violations.length(); i++) {
                     JSONObject obj = violations.getJSONObject(i);
                     Violation v = new Violation();
@@ -230,12 +245,19 @@ public class PhatNguoiFragment extends Fragment {
                     violationsList.add(v);
                 }
                 adapter.notifyDataSetChanged();
+                resetCaptcha();
             } catch (Exception e) {
                 e.printStackTrace();
-                txtThongKeKetQua.setText("❌ Lỗi xử lý dữ liệu!");
+                txtThongKeKetQua.setText("Error: Lỗi xử lý dữ liệu!");
             }
         });
     }
 
-
+    private void resetCaptcha() {
+        turnstileToken = "";
+        btnLoadCaptcha.setImageResource(R.drawable.ic_loading);
+        startRotateAnimation();
+        webCaptcha.reload();
+        checkTurnstileTokenLoop();
+    }
 }
