@@ -169,7 +169,7 @@ public class AlbumFragment extends Fragment {
 
             new AlertDialog.Builder(requireContext())
                     .setTitle(getString(R.string.xoa_anh))
-                    .setMessage(getString(R.string.ban_co_chac_chan_muon_xoa) + selected.size() + getString(R.string.anh_h))
+                    .setMessage(getString(R.string.ban_co_chac_chan_muon_xoa)+ " " + selected.size() + " " + getString(R.string.anh_h))
                     .setPositiveButton(getString(R.string.xoa), (dialog, which) -> {
                         for (Uri uri : selected) {
                             requireContext().getContentResolver().delete(uri, null, null);

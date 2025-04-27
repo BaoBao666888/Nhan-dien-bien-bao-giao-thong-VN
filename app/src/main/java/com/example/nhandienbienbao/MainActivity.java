@@ -35,6 +35,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentTransaction;
+import com.example.nhandienbienbao.Fragments.PhatNguoiFragment;
+
 
 
 import com.example.nhandienbienbao.Adapter.AlbumAdapter;
@@ -115,9 +117,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.bnttructiep).setOnClickListener(v -> {
-            // Chưa làm gì, nếu muốn có highlight thì:
-//            highlightBottomNav(R.id.bnttructiep);
+        findViewById(R.id.bntTraCuu).setOnClickListener(v -> {
+            if (currentTabId != R.id.bntTraCuu) {
+                replaceFragment(new PhatNguoiFragment(), R.id.bntTraCuu);
+                highlightBottomNav(R.id.bntTraCuu);
+            }
         });
 
         findViewById(R.id.bntThoat).setOnClickListener(v -> {
@@ -221,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.bntHuongDan,
                 R.id.bntThongKe,
                 R.id.bntAlbum,
-                R.id.bnttructiep,
+                R.id.bntTraCuu,
                 R.id.bntThoat
         };
 

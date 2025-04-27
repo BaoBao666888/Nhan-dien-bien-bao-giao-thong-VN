@@ -98,7 +98,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/bnttructiep"
+                android:id="@+id/bntTraCuu"
                 android:background="?attr/selectableItemBackground"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -108,7 +108,7 @@
                 <ImageView android:src="@android:drawable/ic_menu_camera"
                     android:layout_width="24dp"
                     android:layout_height="24dp" />
-                <TextView android:text="@string/truc_tiep"
+                <TextView android:text="@string/tra_cuu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10sp" />

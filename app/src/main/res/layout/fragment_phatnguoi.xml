@@ -1,0 +1,82 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtBienSo"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Nhập biển số (VD: 30H16234)"
+                android:inputType="text"
+                android:padding="12dp"
+                android:background="@drawable/edit_text_background"/>
+
+            <ImageView
+                android:id="@+id/btnLoadCaptcha"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_loading"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Load captcha"/>
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spinnerLoaiXe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"/>
+
+        <Button
+            android:id="@+id/btnTraCuu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tra cứu"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:id="@+id/txtThongKeKetQua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kết quả sẽ hiển thị ở đây"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginTop="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerKetQua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <WebView
+            android:id="@+id/webCaptcha"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+</ScrollView>

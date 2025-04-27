@@ -16,6 +16,12 @@
         <item>@string/toi</item>
     </string-array>
 
+    <string-array name="loai_xe_array">
+        <item>@string/o_to</item>
+        <item>@string/xe_may</item>
+        <item>@string/xe_dap_dien</item>
+    </string-array>
+
     <!-- Và thêm vào strings.xml các dòng này: -->
     <string name="theo_he_thong">Theo hệ thống</string>
     <string name="sang">Sáng</string>
@@ -36,6 +42,7 @@
     <string name="thong_ke">Thống kê</string>
     <string name="album">Album</string>
     <string name="truc_tiep">Trực tiếp</string>
+    <string name="tra_cuu">Tra cứu</string>
     <string name="dang_xuat">Đăng xuất</string>
     <string name="dang_nhap">Đăng nhập</string>
 
@@ -72,6 +79,11 @@
     <string name="anh_goc">Ảnh gốc</string>
     <string name="cac_bien_bao_duoc_nhan_dien">Các biển báo được nhận diện</string>
     <string name="quay_lai">Quay lại</string>
+
+    <!-- Tra Cứu -->
+    <string name="o_to">Ô tô</string>
+    <string name="xe_may">Xe máy</string>
+    <string name="xe_dap_dien">Xe đạp điện</string>
 
     <!-- Others -->
 
