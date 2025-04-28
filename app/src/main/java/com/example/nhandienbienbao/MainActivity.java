@@ -78,18 +78,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        applySavedLanguage();
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int savedMode = prefs.getInt("theme_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         AppCompatDelegate.setDefaultNightMode(savedMode);
         //--
-        String savedLanguage = prefs.getString("app_language", "vi");
-        Locale locale = new Locale(savedLanguage);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.setLocale(locale);
-        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+//        String savedLanguage = prefs.getString("app_language", "vi");
+//        Locale locale = new Locale(savedLanguage);
+//        Locale.setDefault(locale);
+//        Configuration config = new Configuration();
+//        config.setLocale(locale);
+//        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
         setContentView(R.layout.activity_main);
 
@@ -157,6 +158,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    private void applySavedLanguage() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String languageCode = prefs.getString("app_language", "vi"); // mặc định "vi"
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+    }
+
 
     private void replaceFragment(Fragment fragment, int newTabId, boolean addToBackStack) {
         if (newTabId != currentTabId) {
