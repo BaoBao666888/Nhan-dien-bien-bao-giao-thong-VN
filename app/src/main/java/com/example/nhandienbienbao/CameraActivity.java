@@ -71,7 +71,8 @@ public class CameraActivity extends AppCompatActivity {
         imageView = findViewById(R.id.capturedImage);
         resultsContainer = findViewById(R.id.resultsContainer);
         ImageView backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(v -> finish());
+        backButton.setOnClickListener(v -> handleBackAction());
+
 
         try {
             tflite = new Interpreter(loadModelFile("best_float32.tflite"));
@@ -92,11 +93,11 @@ public class CameraActivity extends AppCompatActivity {
             loading.setVisibility(View.VISIBLE);
             isProcessing = true;
 
-            imageView.postDelayed(() -> {
-                if (currentBitmap != null) runTFLite(currentBitmap);
-                loading.setVisibility(View.GONE);
-                isProcessing = false;
-            }, 500);
+            imageView.post(() -> {
+                if (currentBitmap != null) {
+                    runTFLite(currentBitmap);
+                }
+            });
 
         } else {
             // Mặc định: luôn mở camera nếu không nhận ảnh (kể cả quên "fab")
@@ -115,21 +116,7 @@ public class CameraActivity extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (isProcessing) {
-                    new AlertDialog.Builder(CameraActivity.this)
-                            .setTitle("Đang nhận diện")
-                            .setMessage("Ứng dụng đang nhận diện ảnh. Bạn chắc chắn muốn thoát?")
-                            .setPositiveButton("Thoát", (dialog, which) -> {
-                                isProcessing = false;
-                                setResult(RESULT_OK);
-                                finish();
-                            })
-                            .setNegativeButton("Huỷ", null)
-                            .show();
-                } else {
-                    setResult(RESULT_OK);
-                    finish();
-                }
+                handleBackAction();
             }
         });
 
@@ -205,37 +192,53 @@ public class CameraActivity extends AppCompatActivity {
 
     private void runTFLite(Bitmap photo) {
         if (photo == null || tflite == null) return;
-        ByteBuffer input = convertBitmapToByteBuffer(photo);
-        float[][][] output = new float[1][300][6];
-        tflite.run(input, output);
 
-        int w = photo.getWidth();
-        int h = photo.getHeight();
-        resultsContainer.removeAllViews();
+        isProcessing = true; // Bắt đầu nhận diện -> set true
+        ProgressBar loading = findViewById(R.id.progressBar);
+        runOnUiThread(() -> loading.setVisibility(View.VISIBLE));
 
-        for (float[] result : output[0]) {
-            float x1 = result[0] * w;
-            float y1 = result[1] * h;
-            float x2 = result[2] * w;
-            float y2 = result[3] * h;
-            float score = result[4];
-            int cls = (int) result[5];
+        new Thread(() -> {
+            ByteBuffer input = convertBitmapToByteBuffer(photo);
+            float[][][] output = new float[1][300][6];
+            tflite.run(input, output);
 
-            if (score > CONF_THRESHOLD) {
-                try {
-                    Rect rect = new Rect((int)x1, (int)y1, (int)x2, (int)y2);
-                    Bitmap cropped = Bitmap.createBitmap(photo, rect.left, rect.top, rect.width(), rect.height());
-                    addResultView(cropped, cls, score);
-                } catch (Exception e) {
-                    e.printStackTrace();
+            int w = photo.getWidth();
+            int h = photo.getHeight();
+
+            runOnUiThread(() -> resultsContainer.removeAllViews());
+
+            for (float[] result : output[0]) {
+                float x1 = result[0] * w;
+                float y1 = result[1] * h;
+                float x2 = result[2] * w;
+                float y2 = result[3] * h;
+                float score = result[4];
+                int cls = (int) result[5];
+
+                if (score > CONF_THRESHOLD) {
+                    try {
+                        Rect rect = new Rect((int)x1, (int)y1, (int)x2, (int)y2);
+                        Bitmap cropped = Bitmap.createBitmap(photo, rect.left, rect.top, rect.width(), rect.height());
+
+                        runOnUiThread(() -> addResultView(cropped, cls, score));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        }
-        if (!isFromAlbum) {
-            saveImageToGallery(photo);
-        }
 
+            runOnUiThread(() -> {
+                if (!isFromAlbum) {
+                    saveImageToGallery(photo);
+                }
+                loading.setVisibility(View.GONE); // Ẩn loading khi thật sự xử lý xong
+                isProcessing = false; // Xong rồi mới set false
+            });
+
+        }).start();
     }
+
+
 
     private void addResultView(Bitmap cropped, int cls, float score) {
         ImageView signView = new ImageView(this);
@@ -343,5 +346,24 @@ public class CameraActivity extends AppCompatActivity {
             return null;
         }
     }
+
+    private void handleBackAction() {
+        if (isProcessing) {
+            new AlertDialog.Builder(CameraActivity.this)
+                    .setTitle(getString(R.string.dang_nhan_dien))
+                    .setMessage(getString(R.string.canh_bao_thoat_nhan_dien))
+                    .setPositiveButton(getString(R.string.thoat), (dialog, which) -> {
+                        isProcessing = false;
+                        setResult(RESULT_OK);
+                        finish();
+                    })
+                    .setNegativeButton(getString(R.string.huy), null)
+                    .show();
+        } else {
+            setResult(RESULT_OK);
+            finish();
+        }
+    }
+
 
 }

@@ -77,6 +77,10 @@
     <string name="ban_dang_su_dung_phien_ban_moi_nhat">最新バージョンを使用しています。</string>
     <string name="xac_nhan_dat_lai_cai_dat">すべての設定をデフォルトにリセットしてもよろしいですか？</string>
     <string name="dat_lai">リセット</string>
+
     <string name="da_dat_lai_cai_dat_mac_dinh">設定がデフォルトにリセットされました</string>
+    <string name="dang_nhan_dien">検出中</string>
+    <string name="canh_bao_thoat_nhan_dien">アプリが画像を検出しています。終了してもよろしいですか？</string>
+    <string name="thoat">終了</string>
 
 </resources>

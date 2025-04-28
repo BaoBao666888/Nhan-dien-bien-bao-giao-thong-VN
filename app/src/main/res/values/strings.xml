@@ -83,6 +83,9 @@
     <string name="anh_goc">Ảnh gốc</string>
     <string name="cac_bien_bao_duoc_nhan_dien">Các biển báo được nhận diện</string>
     <string name="quay_lai">Quay lại</string>
+    <string name="dang_nhan_dien">Đang nhận diện</string>
+    <string name="canh_bao_thoat_nhan_dien">Ứng dụng đang nhận diện ảnh. Bạn chắc chắn muốn thoát?</string>
+    <string name="thoat">Thoát</string>
 
     <!-- Tra Cứu -->
     <string name="o_to">Ô tô</string>
