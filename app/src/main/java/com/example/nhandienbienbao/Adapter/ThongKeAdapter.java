@@ -43,7 +43,7 @@ public class ThongKeAdapter extends RecyclerView.Adapter<ThongKeAdapter.ThongKeV
         ThongKeItem item = thongKeList.get(position);
 
         holder.textLabel.setText(item.label);
-        holder.textAccuracy.setText(context.getString(R.string.do_chinh_xac) + " " + item.accuracy +"%");
+        holder.textAccuracy.setText(context.getString(R.string.do_chinh_xac) + " " + item.accuracy);
         holder.textTime.setText(item.time);
 
         File imageFile = new File(context.getExternalFilesDir("Cropped"), item.imageName);
