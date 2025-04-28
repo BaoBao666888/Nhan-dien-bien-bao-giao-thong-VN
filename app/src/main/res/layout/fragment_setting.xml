@@ -29,8 +29,11 @@
 
         <Spinner
             android:id="@+id/language_spinner"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:backgroundTint="?android:attr/colorControlHighlight"
             android:entries="@array/language_options" />
     </LinearLayout>
 
@@ -46,12 +49,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/giao_dien"
-            android:textSize="18sp" />
+            android:textSize="18sp"/>
 
         <Spinner
             android:id="@+id/theme_spinner"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:backgroundTint="?android:attr/colorControlHighlight"
             android:entries="@array/theme_options" />
     </LinearLayout>
 
@@ -118,14 +124,23 @@
     </LinearLayout>
 
     <!-- Đặt lại cài đặt -->
-    <Button
-        android:id="@+id/reset_settings_button"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dat_lai_cai_dat"
-        android:backgroundTint="#FF6347"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:paddingTop="16dp"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="8dp">
+
+        <Button
+            android:id="@+id/reset_settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dat_lai_cai_dat"
+            android:backgroundTint="#FF6347"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="8dp"/>
+    </LinearLayout>
 
 </LinearLayout>
