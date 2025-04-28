@@ -283,10 +283,11 @@ public class CameraActivity extends AppCompatActivity {
     }
     private void saveDetectionLog(String label, float score, String imageName) {
         String filename = "thongke.csv";
-        String line = String.format(Locale.getDefault(), "%s,%s,%.1f%%,%s\n",
+        String formattedScore = String.format(Locale.US, "%.1f%%", score * 100);
+        String line = String.format(Locale.getDefault(), "%s,%s,%s,%s\n",
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()),
                 label,
-                score * 100,
+                formattedScore,
                 imageName);
 
         try {

@@ -29,6 +29,9 @@ import java.io.IOException;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
+
 
 public class ThongKeFragment extends Fragment {
 
@@ -87,7 +90,9 @@ public class ThongKeFragment extends Fragment {
         thongKeItems.clear();
         if (fileThongKe.exists()) {
             try {
-                BufferedReader reader = new BufferedReader(new FileReader(fileThongKe));
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(new FileInputStream(fileThongKe), "UTF-8")
+                );
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split(",");
