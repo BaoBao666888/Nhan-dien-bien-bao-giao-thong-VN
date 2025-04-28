@@ -85,5 +85,16 @@
     <string name="chup_anh_moi">Tomar una nueva foto</string>
     <string name="more_images">Más imágenes</string>
 
+    <string name="loi">Error</string>
+    <string name="vui_long_nhap_day_du_thong_tin">Por favor complete toda la información</string>
+    <string name="mat_khau_khong_khop">Las contraseñas no coinciden</string>
+    <string name="dang_ky_thanh_cong">Registro exitoso</string>
+    <string name="dang_nhap_that_bai">Inicio de sesión fallido</string>
+    <string name="dang_nhap_thanh_cong">Inicio de sesión exitoso</string>
+    <string name="vui_long_nhap_email_va_mat_khau">Por favor ingrese correo electrónico y contraseña</string>
+    <string name="da_gui_email_xac_thuc">¡Correo de restablecimiento de contraseña enviado!</string>
+    <string name="nhap_email_truoc_khi_dat_lai_mat_khau">Ingrese el correo electrónico antes de restablecer la contraseña</string>
+
+
 
 </resources>

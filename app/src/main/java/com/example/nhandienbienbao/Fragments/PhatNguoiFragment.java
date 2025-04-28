@@ -217,7 +217,7 @@ public class PhatNguoiFragment extends Fragment {
                 if (data.has("message") && data.getString("message").contains("Không có kết quả")) {
                     violationsList.clear();
                     adapter.notifyDataSetChanged();
-                    txtThongKeKetQua.setText("Error: " + data.getString("message"));
+                    txtThongKeKetQua.setText(data.getString("message"));
                     resetCaptcha();
                     return;
                 }

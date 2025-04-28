@@ -57,23 +57,23 @@ public class RegisterActivity extends AppCompatActivity {
         String confirm = confirmField.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
-            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.vui_long_nhap_day_du_thong_tin), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!password.equals(confirm)) {
-            Toast.makeText(this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.mat_khau_khong_khop), Toast.LENGTH_SHORT).show();
             return;
         }
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.dang_ky_thanh_cong), Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(this, MainActivity.class));
                         finish();
                     } else {
-                        Toast.makeText(this, "Lỗi: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.loi) + ": " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

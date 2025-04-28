@@ -85,4 +85,15 @@
 
     <string name="chup_anh_moi">拍摄新照片</string>
     <string name="more_images">更多图片</string>
+
+    <string name="loi">错误</string>
+    <string name="vui_long_nhap_day_du_thong_tin">请填写所有信息</string>
+    <string name="mat_khau_khong_khop">密码不匹配</string>
+    <string name="dang_ky_thanh_cong">注册成功</string>
+    <string name="dang_nhap_that_bai">登录失败</string>
+    <string name="dang_nhap_thanh_cong">登录成功</string>
+    <string name="vui_long_nhap_email_va_mat_khau">请输入邮箱和密码</string>
+    <string name="da_gui_email_xac_thuc">已发送密码重置邮件！</string>
+    <string name="nhap_email_truoc_khi_dat_lai_mat_khau">请先输入邮箱再重置密码</string>
+
 </resources>

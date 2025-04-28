@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.example.nhandienbienbao.R;
 import android.widget.Toast;
 import java.util.Locale;
+import com.example.nhandienbienbao.MainActivity;
 
 public class SettingFragment extends Fragment {
 
@@ -171,15 +172,14 @@ public class SettingFragment extends Fragment {
     }
 
     private void applyNewLanguage(String languageCode) {
-        Locale locale = new Locale(languageCode);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.setLocale(locale);
-        requireContext().getResources().updateConfiguration(config, requireContext().getResources().getDisplayMetrics());
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
         prefs.edit().putString("app_language", languageCode).apply();
 
-        requireActivity().recreate();
+        Intent intent = new Intent(requireContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+
+        requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
+
 }

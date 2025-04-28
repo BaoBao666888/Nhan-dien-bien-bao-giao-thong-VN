@@ -47,16 +47,16 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.forgotPassword).setOnClickListener(v -> {
             String email = emailField.getText().toString().trim();
             if (email.isEmpty()) {
-                Toast.makeText(this, "Nhập email trước khi đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.nhap_email_truoc_khi_dat_lai_mat_khau), Toast.LENGTH_SHORT).show();
                 return;
             }
 
             mAuth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(this, "Đã gửi email đặt lại mật khẩu!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getString(R.string.da_gui_email_xac_thuc), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(this, "Lỗi: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         });
@@ -77,18 +77,18 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordField.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Vui lòng nhập email và mật khẩu", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.vui_long_nhap_email_va_mat_khau), Toast.LENGTH_SHORT).show();
             return;
         }
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.dang_nhap_thanh_cong), Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(this, MainActivity.class));
                         finish();
                     } else {
-                        Toast.makeText(this, "Đăng nhập thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.dang_nhap_that_bai) + ": " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
