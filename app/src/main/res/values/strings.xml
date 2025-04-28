@@ -57,6 +57,8 @@
     <string name="xac_nhan_dat_lai_cai_dat">Bạn có chắc muốn đặt lại toàn bộ cài đặt về mặc định không?</string>
     <string name="dat_lai">Đặt lại</string>
     <string name="da_dat_lai_cai_dat_mac_dinh">Đã đặt lại cài đặt về mặc định</string>
+    <string name="tai_khoan_hien_tai">Tài khoản hiện tại</string>
+    <string name="tai_khoan_chua_dang_nhap">Tài khoản: Chưa đăng nhập</string>
 
     <!-- Album -->
     <string name="chon_anh">Chọn ảnh</string>
@@ -79,6 +81,7 @@
     <string name="nhap_lai_mat_khau">Nhập lại mật khẩu</string>
     <string name="quen_mat_khau">Quên mật khẩu?</string>
     <string name="hoac">Hoặc</string>
+
     <string name="loi">Lỗi</string>
     <string name="vui_long_nhap_day_du_thong_tin">Vui lòng nhập đầy đủ thông tin</string>
     <string name="mat_khau_khong_khop">Mật khẩu không khớp</string>
@@ -87,6 +90,12 @@
     <string name="dang_nhap_thanh_cong">Đăng nhập thành công</string>
     <string name="vui_long_nhap_email_va_mat_khau">Vui lòng nhập email và mật khẩu</string>
     <string name="da_gui_email_xac_thuc">Đã gửi email đặt lại mật khẩu!</string>
+
+    <string name="co">Có</string>
+    <string name="khong">Không</string>
+    <string name="xoa_du_lieu_cu">Xóa dữ liệu cũ?</string>
+    <string name="canh_bao_xoa_lich_su_nhan_dien_va_album">Bạn vừa đăng nhập tài khoản mới. Có muốn xóa lịch sử nhận diện và album cũ không?</string>
+
     <string name="nhap_email_truoc_khi_dat_lai_mat_khau">Nhập email trước khi đặt lại mật khẩu</string>
     <!-- Camera -->
     <string name="anh_goc">Ảnh gốc</string>

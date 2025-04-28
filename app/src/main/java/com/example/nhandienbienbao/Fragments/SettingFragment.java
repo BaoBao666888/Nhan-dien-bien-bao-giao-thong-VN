@@ -21,19 +21,32 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.example.nhandienbienbao.R;
+
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Locale;
 import com.example.nhandienbienbao.MainActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SettingFragment extends Fragment {
 
     private String initialLanguage;
     private String selectedLanguage;
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
+
+        TextView accountInfo = view.findViewById(R.id.account_info);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            accountInfo.setText(getString(R.string.tai_khoan_hien_tai) + ": " + user.getEmail());
+        } else {
+            accountInfo.setText(getString(R.string.tai_khoan_chua_dang_nhap));
+        }
 
         Spinner themeSpinner = view.findViewById(R.id.theme_spinner);
         Spinner languageSpinner = view.findViewById(R.id.language_spinner);

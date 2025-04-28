@@ -96,4 +96,12 @@
     <string name="da_gui_email_xac_thuc">已发送密码重置邮件！</string>
     <string name="nhap_email_truoc_khi_dat_lai_mat_khau">请先输入邮箱再重置密码</string>
 
+    <string name="co">是</string>
+    <string name="khong">否</string>
+    <string name="xoa_du_lieu_cu">删除旧数据？</string>
+    <string name="canh_bao_xoa_lich_su_nhan_dien_va_album">您已登录新账户。要删除以前的识别历史记录和相册吗？</string>
+
+    <string name="tai_khoan_hien_tai">当前账户</string>
+    <string name="tai_khoan_chua_dang_nhap">账户：未登录</string>
+
 </resources>

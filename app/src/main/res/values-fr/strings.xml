@@ -82,7 +82,7 @@
     <string name="da_dat_lai_cai_dat_mac_dinh">Les paramètres ont été réinitialisés aux valeurs par défaut</string>
 
     <string name="dang_nhan_dien">Détection en cours</string>
-    <string name="canh_bao_thoat_nhan_dien">L\'application détecte l\'image. Êtes-vous sûr de vouloir quitter ?</string>
+    <string name="canh_bao_thoat_nhan_dien">L\'application détecte l\'image. Êtes-vous sûr de vouloir quitter?</string>
     <string name="thoat">Quitter</string>
 
     <string name="chup_anh_moi">Prendre une nouvelle photo</string>
@@ -95,8 +95,15 @@
     <string name="dang_nhap_that_bai">Échec de la connexion</string>
     <string name="dang_nhap_thanh_cong">Connexion réussie</string>
     <string name="vui_long_nhap_email_va_mat_khau">Veuillez entrer l\'e-mail et le mot de passe</string>
-    <string name="da_gui_email_xac_thuc">E-mail de réinitialisation du mot de passe envoyé !</string>
+    <string name="da_gui_email_xac_thuc">E-mail de réinitialisation du mot de passe envoyé!</string>
     <string name="nhap_email_truoc_khi_dat_lai_mat_khau">Veuillez entrer l\'e-mail avant de réinitialiser le mot de passe</string>
 
+    <string name="co">Oui</string>
+    <string name="khong">Non</string>
+    <string name="xoa_du_lieu_cu">Supprimer les anciennes données?</string>
+    <string name="canh_bao_xoa_lich_su_nhan_dien_va_album">Vous vous êtes connecté à un nouveau compte. Voulez-vous supprimer l\'historique de reconnaissance et l\'album précédents?</string>
+
+    <string name="tai_khoan_hien_tai">Compte actuel</string>
+    <string name="tai_khoan_chua_dang_nhap">Compte : Non connecté</string>
 
 </resources>

@@ -114,5 +114,12 @@
     <string name="da_gui_email_xac_thuc">Password reset email sent!</string>
     <string name="nhap_email_truoc_khi_dat_lai_mat_khau">Enter email before resetting password</string>
 
+    <string name="co">Yes</string>
+    <string name="khong">No</string>
+    <string name="xoa_du_lieu_cu">Delete old data?</string>
+    <string name="canh_bao_xoa_lich_su_nhan_dien_va_album">You have logged into a new account. Do you want to delete the previous recognition history and album?</string>
+
+    <string name="tai_khoan_hien_tai">Current Account</string>
+    <string name="tai_khoan_chua_dang_nhap">Account: Not logged in</string>
 
 </resources>

@@ -96,5 +96,12 @@
     <string name="da_gui_email_xac_thuc">パスワードリセットのメールを送信しました！</string>
     <string name="nhap_email_truoc_khi_dat_lai_mat_khau">パスワードをリセットする前にメールアドレスを入力してください</string>
 
+    <string name="co">はい</string>
+    <string name="khong">いいえ</string>
+    <string name="xoa_du_lieu_cu">古いデータを削除しますか？</string>
+    <string name="canh_bao_xoa_lich_su_nhan_dien_va_album">新しいアカウントにログインしました。以前の認識履歴とアルバムを削除しますか？</string>
+
+    <string name="tai_khoan_hien_tai">現在のアカウント</string>
+    <string name="tai_khoan_chua_dang_nhap">アカウント：未ログイン</string>
 
 </resources>

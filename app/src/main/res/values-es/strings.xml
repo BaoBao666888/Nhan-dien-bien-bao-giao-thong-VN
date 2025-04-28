@@ -95,6 +95,12 @@
     <string name="da_gui_email_xac_thuc">¡Correo de restablecimiento de contraseña enviado!</string>
     <string name="nhap_email_truoc_khi_dat_lai_mat_khau">Ingrese el correo electrónico antes de restablecer la contraseña</string>
 
+    <string name="co">Sí</string>
+    <string name="khong">No</string>
+    <string name="xoa_du_lieu_cu">¿Eliminar datos antiguos?</string>
+    <string name="canh_bao_xoa_lich_su_nhan_dien_va_album">Has iniciado sesión en una nueva cuenta. ¿Deseas eliminar el historial de reconocimiento y el álbum anteriores?</string>
 
+    <string name="tai_khoan_hien_tai">Cuenta actual</string>
+    <string name="tai_khoan_chua_dang_nhap">Cuenta: No ha iniciado sesión</string>
 
 </resources>
