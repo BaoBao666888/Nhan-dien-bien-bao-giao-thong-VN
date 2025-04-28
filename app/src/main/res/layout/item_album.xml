@@ -7,7 +7,16 @@
         android:id="@+id/imageThumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:background="?android:attr/selectableItemBackground" />
+
+    <!-- Layer trắng trong suốt để sáng ảnh khi chọn -->
+    <View
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80FFFFFF"
+        android:visibility="gone"/>
 
     <CheckBox
         android:id="@+id/checkboxSelect"

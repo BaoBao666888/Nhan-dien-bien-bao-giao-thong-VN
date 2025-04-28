@@ -89,7 +89,7 @@
                     android:layout_height="24dp"
                     app:tint="@color/purple_500"
                     android:elevation="4dp"/>
-                <TextView android:text="Album"
+                <TextView android:text="@string/album"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10sp"

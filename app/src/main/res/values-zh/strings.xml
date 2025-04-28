@@ -83,4 +83,6 @@
     <string name="canh_bao_thoat_nhan_dien">应用正在检测图像。确定要退出吗？</string>
     <string name="thoat">退出</string>
 
+    <string name="chup_anh_moi">拍摄新照片</string>
+    <string name="more_images">更多图片</string>
 </resources>

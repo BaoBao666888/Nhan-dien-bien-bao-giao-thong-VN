@@ -85,4 +85,7 @@
     <string name="canh_bao_thoat_nhan_dien">L\'application détecte l\'image. Êtes-vous sûr de vouloir quitter ?</string>
     <string name="thoat">Quitter</string>
 
+    <string name="chup_anh_moi">Prendre une nouvelle photo</string>
+    <string name="more_images">Plus d\'images</string>
+
 </resources>

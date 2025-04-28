@@ -42,11 +42,13 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         CheckBox checkBox;
+        View overlay;
 
         public ViewHolder(View view) {
             super(view);
             image = view.findViewById(R.id.imageThumbnail);
             checkBox = view.findViewById(R.id.checkboxSelect);
+            overlay = view.findViewById(R.id.overlay);
         }
     }
 
@@ -58,17 +60,17 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (position >= selectedFlags.length) return;
         Uri uri = imageUris.get(position);
         holder.image.setImageURI(uri);
 
         holder.checkBox.setVisibility(multiSelectMode ? View.VISIBLE : View.GONE);
         holder.checkBox.setChecked(selectedFlags[position]);
+        holder.overlay.setVisibility(selectedFlags[position] ? View.VISIBLE : View.GONE); // thêm dòng này
 
         holder.image.setOnClickListener(v -> {
             if (multiSelectMode) {
                 selectedFlags[position] = !selectedFlags[position];
-                notifyItemChanged(position);
+                notifyItemChanged(position); // chỉ update đúng 1 item
             } else {
                 Intent intent = new Intent(context, CameraActivity.class);
                 intent.putExtra("image_uri", uri);
@@ -76,10 +78,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             }
         });
 
+
         holder.image.setOnLongClickListener(v -> {
             if (!multiSelectMode) {
                 multiSelectMode = true;
-                notifyItemRangeChanged(0, imageUris.size());
+                notifyDataSetChanged();
                 if (selectionChangeListener != null) {
                     selectionChangeListener.onMultiSelectStarted();
                 }
@@ -88,9 +91,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         });
 
 
-
         holder.checkBox.setOnClickListener(v -> {
             selectedFlags[position] = holder.checkBox.isChecked();
+            notifyItemChanged(position); // thêm để update overlay luôn
         });
     }
 

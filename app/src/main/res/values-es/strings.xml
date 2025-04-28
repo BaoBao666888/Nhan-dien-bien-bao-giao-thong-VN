@@ -82,6 +82,8 @@
     <string name="dang_nhan_dien">Detectando</string>
     <string name="canh_bao_thoat_nhan_dien">La aplicación está detectando la imagen. ¿Seguro que quieres salir?</string>
     <string name="thoat">Salir</string>
+    <string name="chup_anh_moi">Tomar una nueva foto</string>
+    <string name="more_images">Más imágenes</string>
 
 
 </resources>

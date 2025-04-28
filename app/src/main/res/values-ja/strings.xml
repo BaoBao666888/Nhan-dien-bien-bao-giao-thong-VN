@@ -83,4 +83,7 @@
     <string name="canh_bao_thoat_nhan_dien">アプリが画像を検出しています。終了してもよろしいですか？</string>
     <string name="thoat">終了</string>
 
+    <string name="chup_anh_moi">新しい写真を撮る</string>
+    <string name="more_images">もっと画像を見る</string>
+
 </resources>

@@ -18,11 +18,11 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.nhandienbienbao.Adapter.AlbumAdapter;
 import com.example.nhandienbienbao.CameraActivity;
@@ -57,6 +57,13 @@ public class AlbumFragment extends Fragment {
         btnCancel = view.findViewById(R.id.btnCancel);
 
         //chưa gán adapter, chỉ để khung RecyclerView
+
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            refreshAlbumIfNeeded();
+            swipeRefreshLayout.setRefreshing(false); //  nhớ tắt refreshing
+        });
+
 
         loadImagesAsync(); //tải hình nền
 
@@ -94,16 +101,19 @@ public class AlbumFragment extends Fragment {
         new Thread(() -> {
             List<Uri> imageUris = loadImagesFromGallery(getContext());
 
-            requireActivity().runOnUiThread(() -> {
-                adapter = new AlbumAdapter(getContext(), imageUris);
-                recyclerView.setAdapter(adapter);
+            if (isAdded()) { // check Fragment còn attach không
+                requireActivity().runOnUiThread(() -> {
+                    adapter = new AlbumAdapter(getContext(), imageUris);
+                    recyclerView.setAdapter(adapter);
 
-                adapter.setSelectionChangeListener(() -> {
-                    actionBar.setVisibility(View.VISIBLE);
+                    adapter.setSelectionChangeListener(() -> {
+                        actionBar.setVisibility(View.VISIBLE);
+                    });
                 });
-            });
+            }
         }).start();
     }
+
 
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -187,7 +197,10 @@ public class AlbumFragment extends Fragment {
     }
 
     private void refreshAlbumIfNeeded() {
-        if (adapter == null) return; // Nếu chưa load xong adapter thì thôi, tránh crash
+        if (adapter == null) {
+            loadImagesAsync();
+            return;
+        }
 
         List<Uri> newUris = loadImagesFromGallery(getContext());
         if (!newUris.equals(oldImageUris)) {
@@ -201,7 +214,7 @@ public class AlbumFragment extends Fragment {
             } else {
                 actionBar.setVisibility(View.GONE);
             }
-        }, 300);
+        }, 100);
     }
 
 

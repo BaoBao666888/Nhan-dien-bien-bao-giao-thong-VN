@@ -62,7 +62,8 @@
     <string name="chon_anh">Chọn ảnh</string>
     <string name="tim_kiem">Tìm kiếm</string>
     <string name="more_albums">Xem thêm album</string>
-
+    <string name="chup_anh_moi">Chụp ảnh mới</string>
+    <string name="more_images">More images</string>
     <!-- Thống kê -->
     <string name="tieu_de_thong_ke">Thống kê</string>
     <string name="xoa_thong_ke">Xoá thống kê</string>

@@ -10,35 +10,35 @@
     android:visibility="gone"
     android:weightSum="3">
 
+    <!-- Nút Chọn tất cả -->
     <Button
         android:id="@+id/btnSelectAll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#4CAF50"
         android:textColor="@android:color/white"
-        android:text="@string/chon_tat_ca"
-        android:background="@drawable/rounded_button"/>
+        android:backgroundTint="#6200EE"
+    android:text="@string/chon_tat_ca"/>
 
+    <!-- Nút Xóa -->
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#F44336"
         android:textColor="@android:color/white"
-        android:text="@string/xoa"
-        android:background="@drawable/rounded_button"/>
+        android:backgroundTint="#D32F2F"
+    android:text="@string/xoa"/>
 
+    <!-- Nút Huỷ -->
     <Button
         android:id="@+id/btnCancel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:backgroundTint="#9E9E9E"
         android:textColor="@android:color/white"
-        android:text="@string/huy"
-        android:background="@drawable/rounded_button"/>
+        android:backgroundTint="#757575"
+    android:text="@string/huy"/>
 </LinearLayout>

@@ -55,10 +55,8 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite:2.13.0")
     implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
     implementation("com.google.firebase:firebase-auth")
-    implementation("org.jsoup:jsoup:1.15.4")
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
-
+    implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
 }

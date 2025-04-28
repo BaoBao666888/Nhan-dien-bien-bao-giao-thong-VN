@@ -101,6 +101,7 @@
     <string name="canh_bao_thoat_nhan_dien">The app is detecting the image. Are you sure you want to exit?</string>
     <string name="thoat">Exit</string>
 
-
+    <string name="chup_anh_moi">Take a new photo</string>
+    <string name="more_images">More images</string>
 
 </resources>
